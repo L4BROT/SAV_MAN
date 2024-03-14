@@ -1,3 +1,14 @@
+<?php
+session_start(); // Démarrage de la session
+
+// Inclusion du fichier du modèle
+require_once("../PHP/modele.inc.php");
+
+// Initialisation de la variable d'erreur
+$error = isset($_SESSION['error']) ? $_SESSION['error'] : "";
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -18,7 +29,8 @@
                 <div class="card" style="background-color: #3b4f9f;">
                     <div class="card-header text-center text-white">Login</div>
                     <div class="card-body ">
-                        <form action="login_process.php" method="post">
+                        <form action="../indexCo.php" method="post">
+                            <input type="hidden" name="action" value="connexion">
                             <div class="form-group text-center text-white mb-3">
                                 <label for="username">Username</label>
                                 <input type="text" class="form-control" id="username" name="username" required>
@@ -28,11 +40,17 @@
                                 <input type="password" class="form-control" id="password" name="password" required>
                             </div>
                             <div class="form-group text-center mt-3">
-                                <!-- Récupérer les clés valeurs du form pour gérer la connexion -->
-                                <form action="" method="post">
-                                    <button type="submit" class="btn btn-primary">Login</button>
-                                </form>
+                                <!-- Bouton de soumission à l'intérieur du formulaire principal -->
+                                <button type="submit" class="btn btn-primary">Login</button>
                             </div>
+                            <?php
+                            // Vérifie si la variable d'erreur est définie et non vide
+                            if (!empty($error)) {
+                                echo "<div class='error-message text-center mt-3 alert alert-danger' style='padding: 5px;'>
+                                          <p style='font-weight: bold; color: red;'>$error</p>
+                                      </div>";
+                            }
+                            ?>
                         </form>
                     </div>
                 </div>
