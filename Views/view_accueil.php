@@ -1,48 +1,72 @@
 <?php
-$titre = "Accueil";
-require_once("../PHP/modele.php");
-require_once("view_header.php");
+    $titre = "Accueil";
+    require_once("view_header.php");
+       
+    if(isset($commandes)){
 ?>
-
-<form action="view_accueil.php" method="post">
-    <input type="hidden" name="liste_commandes">
-    <input type="submit" value="Commandes">
-</form>
-
+    <table id="myTable" class="table table-dark table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th>Id commande</th>
+                <th>Date</th>
+                <th>Détails</th>
+            </tr>
+        </thead>
+        <tbody>
 <?php
-if(isset($_POST["detail_commande"])){
-    $command = getDetailCommandes($_POST["id_commande"]);
+        foreach($commandes as $command){
 ?>
-    <section>
-        <p>Identifiant Commande: <?php echo $command["ID_COMMANDE"]; ?></p>
-        <p>Prix : <?php echo $command["PRIX_COMMANDE"]; ?></p>
-        <p>Paiement : <?php echo $command["STATUT_PAIEMENT"]; ?></p>
-        <p>Expédition : <?php echo $command["STATUT_EXPEDITION"]; ?></p>
-        <p>Date commande : <?php echo $command["DATE_COMMANDE"]; ?></p>
-        <p>Nom client : 
-            <?php 
-                $name = getNameUser($command["ID_CLIENT"]);
-                echo $name["nom"] . " " . $name["prenom"];
-            ?>
-        </p>
-    </section><br>
+            <tr>
+                <td><?php echo $command["id"];?></td>
+                <td><?php echo date('d/m/Y', strtotime($command["date"]));?></td>
+                <td>
+                    <form action="index.php?action=accueil" method="post">
+                        <input type="hidden" name ="action" value="detail_commande">
+                        <input type="hidden" name="id_commande" value="<?php echo $command["id"];?>">
+                        <input type="submit" value="Voir" class="btn btn-primary">
+                    </form>
+                </td>
+            </tr>
 <?php
-}
-
-if(isset($_POST["liste_commandes"])){
-    $commandes = getListCommandes();
-
-    foreach($commandes as $command){
+        }
 ?>
-        <section>ID : <?php echo $command["id"];?> Date : <?php echo $command["date"];?>
-            <form action="view_accueil.php" method="post">
-                <input type="hidden" name="detail_commande">
-                <input type="hidden" name="id_commande" value="<?php echo $command["id"];?>">
-                <input type="submit" value="Détail Commande">
-            </form>
-        </section><br>
+        </tbody>
+        </table>
 <?php
     }
-}
 
+    if(isset($commande)){
+?>
+    <table id="detail_commande" class="table table-dark table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Id commande</th>
+                <th>Date</th>
+                <th>Prix</th>
+                <th>Paiement</th>
+                <th>Expédition</th>
+                <th>Client</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><?php echo $commande["ID_COMMANDE"]; ?></td>
+                <td><?php echo date('d/m/Y', strtotime($commande["DATE_COMMANDE"])); ?></td>
+                <td><?php echo $commande["PRIX_COMMANDE"]; ?></td>
+                <td><?php echo $commande["STATUT_PAIEMENT"]; ?></td>
+                <td><?php echo $commande["STATUT_EXPEDITION"]; ?></td>
+                <td>
+                    <?php 
+                        $name = getNameUser($commande["ID_CLIENT"]);
+                        echo $name["nom"] . " " . $name["prenom"];
+                    ?>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+<?php
+    }
+?>
+
+<?php
 require_once("view_footer.php");

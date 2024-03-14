@@ -1,8 +1,8 @@
 <?php
     function getDetailCommandes($id){
 
-        if(file_exists("../BDD/param.ini")){
-            $tParam = parse_ini_file("../BDD/param.ini", true);
+        if(file_exists("BDD/param.ini")){
+            $tParam = parse_ini_file("BDD/param.ini", true);
             extract($tParam["BDD"]);
         }
 
@@ -25,8 +25,8 @@
     }
 
     function getListCommandes(){
-        if(file_exists("../BDD/param.ini")){
-            $tParam = parse_ini_file("../BDD/param.ini", true);
+        if(file_exists("BDD/param.ini")){
+            $tParam = parse_ini_file("BDD/param.ini", true);
             extract($tParam["BDD"]);
         }
 
@@ -47,8 +47,8 @@
     }
 
     function getNameUser($id){
-        if(file_exists("../BDD/param.ini")){
-            $tParam = parse_ini_file("../BDD/param.ini", true);
+        if(file_exists("BDD/param.ini")){
+            $tParam = parse_ini_file("BDD/param.ini", true);
             extract($tParam["BDD"]);
         }
 
