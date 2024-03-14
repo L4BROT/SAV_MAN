@@ -33,7 +33,7 @@ CREATE TABLE Commandes(
    PRIX_COMMANDE DECIMAL(15,2) NOT NULL,
    STATUT_PAIEMENT VARCHAR(50) NOT NULL,
    STATUT_EXPEDITION VARCHAR(50) NOT NULL,
-   DATE_COMMANDE DATETIME NOT NULL,
+   DATE_COMMANDE DATE NOT NULL,
    ID_CLIENT INT NOT NULL,
    PRIMARY KEY(ID_COMMANDE),
    FOREIGN KEY(ID_CLIENT) REFERENCES Clients(ID_CLIENT)
@@ -93,4 +93,12 @@ CREATE TABLE Stock_Rebus(
 -- Création clients --
 
 INSERT INTO `clients`(`NOM_CLIENT`, `PRENOM_CLIENT`, `ADRESSE_CLIENT`, `CP_CLIENT`, `VILLE_CLIENT`, `TEL_CLIENT`)
-VALUES ('Terrieur','Alain','5 rue du coin','26260','Le Nord','0707070707');
+VALUES ('Terrieur','Alain','5 rue du coin','26260','Le Nord','0707070707'),
+       ('Terrieur','Alex','9 rue du coin','26260','Le Nord','0708090102'),
+       ('Neymar','Jean','5 rue du Lac','32120','Le Sud','0607270757');
+
+-- Création commandes --
+
+INSERT INTO `commandes`(`PRIX_COMMANDE`, `STATUT_PAIEMENT`, `STATUT_EXPEDITION`, `DATE_COMMANDE`, `ID_CLIENT`)
+VALUES ('150','OK','En attente','2024-03-13','1'),
+       ('180','OK','En cours','2024-03-11','2');
