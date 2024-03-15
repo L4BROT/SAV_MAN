@@ -188,3 +188,115 @@
         
         return $resultats;
     }
+
+    //Creation de l'objet pdo connexion a la bdd
+    function getBdd() {
+        //Recuperation des parametre de connexion
+        if (file_exists("BDD/param.ini")) {
+            $param = parse_ini_file("BDD/param.ini",true);
+            extract($param['BDD']);
+        }
+        $bdd = "mysql:host=$host;port=$port;dbname=$bdd;charset=utf8";
+        //var_dump($bdd);
+        $connexion = new PDO($bdd,$user ,$password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+        //print_r($connexion);
+        return $connexion;
+    }
+ 
+    // Ajouter un employé 
+    function addEmploye($mdp,$typ,$nom,$prenom) {
+        //Appel la fonction de controle de saisie des champs
+        $cond = controleChamp($mdp,$nom,$prenom);
+        //Recupere un tableau d'utilisateur
+        $tabEmployes = afficheUtilisateur();
+        //Parcour le tableaux et verifie si le mot de passe est disponible
+        foreach ($tabEmployes as $row) {
+            if ($row['MDP_UTILISATEUR'] == $mdp) {
+                $cond = false ;
+                break;
+            }else {
+                $cond;
+            }
+        }
+        //Si vrais execution de la requete d'ajout de l'utilisateur a la bdd
+        if ($cond) {
+            //echo($mdp.$typ.$nom);
+            $based = getBdd();
+            //var_dump($based);
+            $delete = $based->prepare('INSERT INTO employes (NOM_UTILISATEUR, PRENOM_UTILISATEUR,MDP_UTILISATEUR, TYPE_UTILISATEUR ) VALUES (:nom,:prenom,:mdp,:typ)');          
+            //var_dump($delete);
+        
+            $delete->bindParam('mdp', $mdp, PDO::PARAM_STR);
+            $delete->bindParam('prenom', $prenom, PDO::PARAM_STR);
+            $delete->bindParam('typ', $typ, PDO::PARAM_STR);
+            $delete->bindParam('nom', $nom, PDO::PARAM_STR);
+            
+            
+            $delet = $delete->execute();
+            //var_dump($delet);
+            
+            return $delet;
+            
+        }else {//Sinon retourne faux pour afficher un message d'erreur
+            $delet = false;
+            return $delet;
+        }
+        
+    }
+
+    function controleChamp($mdp,$nom,$prenom){
+        if (preg_match('/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[-+!*$@%_])([-+!*$@%_\w]{8,15})$/', $mdp) && preg_match('/^(?:[^\d\W][\-\s\']{0,1}){2,20}$/i', $nom)&&preg_match('/^(?:[^\d\W][\-\s\']{0,1}){2,20}$/i', $prenom)) {
+            return true;
+        }else {
+            return false;
+        }
+    
+    }
+
+    //Affiche les utilisateur present dans la bdd
+    function afficheUtilisateur(){
+        $bdd = getBdd();
+        $utilisateur = $bdd->query('SELECT * from employes' );
+        
+        return $utilisateur->fetchAll(PDO::FETCH_ASSOC);
+    }
+ 
+    //Permet de modifier les utilisateurs
+    function modifierUtilisateur($nom,$id,$typ,$prenom){
+        //Valide les saisie de modification renvoie vrais ou faux
+        if (preg_match('/^(?:[^\d\W][\-\s\']{0,1}){2,20}$/i', $nom)&&preg_match('/^(?:[^\d\W][\-\s\']{0,1}){2,20}$/i', $prenom))  {
+            //Si vrais envoie de la requete et modification dans la bdd
+            $based = getBdd();
+    
+            $mod = $based->prepare('UPDATE employes SET NOM_UTILISATEUR= :nvNom, PRENOM_UTILISATEUR= :nvprenom, TYPE_UTILISATEUR= :nvType  WHERE ID_EMPLOYE= :contactId');          
+            
+            $mod->bindParam(':nvType', $typ, PDO::PARAM_STR);
+            $mod->bindParam(':nvNom', $nom, PDO::PARAM_STR);
+            $mod->bindParam(':nvprenom', $prenom, PDO::PARAM_STR);
+            $mod->bindParam(':contactId', $id, PDO::PARAM_INT);
+            
+            $delet = $mod->execute();
+            return $delet;
+            
+        }else {//Sinon renvoie faux pour afficher un message d'erreur
+            $delet = false;
+            return $delet;
+        }
+    }
+  //Permet de supprimer un utilisateur
+    function supprimeEmploye($id){
+        //Connexion a la bdd et envoie de la requete et suppression de l'employe dans la bdd
+        $based = getBdd();
+        
+        $mod = $based->prepare('DELETE FROM employes WHERE ID_EMPLOYE= :contactId');          
+    
+        $mod->bindParam(':contactId', $id, PDO::PARAM_INT);
+        try {
+            $delet = $mod->execute();
+        } catch (PDOException $th) {
+            $delet = false;
+        }
+        
+        return $delet;
+    }
+     
