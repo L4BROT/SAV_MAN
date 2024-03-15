@@ -10,8 +10,7 @@
     </form>
 
     <form action="index.php?action=accueil" method="post">
-        <input type="hidden" name="action" value="liste_commandes">
+        <input type="hidden" name="action" value="#">
         <input type="submit" value="Tickets" class="btn btn-primary position_btn">
     </form>
 </div>
-

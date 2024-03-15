@@ -27,6 +27,7 @@
                 <a class="nav-link mx-2" style="color: white;" href="index.php?action=sav">SAV</a>
                 <a class="nav-link mx-2" style="color: white;" href="index.php?action=dossiers_finis">Dossiers finalisés</a>
                 <a class="nav-link mx-2" style="color: white;" href="index.php?action=expedition">Expéditions</a>
+                <a class="nav-link mx-2" style="color: white;" href="index.php?action=ticket">Tickets</a>
             </div>
         </div>
     </div>

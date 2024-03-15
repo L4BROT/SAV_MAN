@@ -1,7 +1,4 @@
-<?php
-    $titre = "Accueil";
-    require_once("view_header.php");
-       
+<?php       
     if(isset($commandes)){
 ?>
     <table id="myTable" class="table table-dark table-striped table-bordered" style="width:100%">
@@ -133,6 +130,3 @@
         </table>
 <?php
     }
-
-
-require_once("view_footer.php");

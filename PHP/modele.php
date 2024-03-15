@@ -117,3 +117,74 @@
         
         return $resultats;
     }
+
+    function getExpeAttente(){
+        if(file_exists("BDD/param.ini")){
+            $tParam = parse_ini_file("BDD/param.ini", true);
+            extract($tParam["BDD"]);
+        }
+
+        $options = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8");
+
+        $dsn = "mysql:host=$host;port=$port;dbname=$bdd";
+        $connexion = new PDO($dsn, $user, $password, $options);
+
+        $requete = "select ID_COMMANDE as id, DATE_COMMANDE as date, STATUT_EXPEDITION as statut from commandes where STATUT_EXPEDITION = 'En attente'";
+        $reponse = $connexion->prepare($requete);
+
+        $reponse->execute();
+
+        $resultats = $reponse->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $resultats;
+    }
+
+    function getExpeEnCours(){
+        if(file_exists("BDD/param.ini")){
+            $tParam = parse_ini_file("BDD/param.ini", true);
+            extract($tParam["BDD"]);
+        }
+
+        $options = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8");
+
+        $dsn = "mysql:host=$host;port=$port;dbname=$bdd";
+        $connexion = new PDO($dsn, $user, $password, $options);
+
+        $requete = "select ID_COMMANDE as id, DATE_COMMANDE as date, STATUT_EXPEDITION as statut from commandes where STATUT_EXPEDITION = 'En cours'";
+        $reponse = $connexion->prepare($requete);
+
+        $reponse->execute();
+
+        $resultats = $reponse->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $resultats;
+    }
+
+    function showBeforeExpe($id){
+        if(file_exists("BDD/param.ini")){
+            $tParam = parse_ini_file("BDD/param.ini", true);
+            extract($tParam["BDD"]);
+        }
+
+        $options = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8");
+
+        $dsn = "mysql:host=$host;port=$port;dbname=$bdd";
+        $connexion = new PDO($dsn, $user, $password, $options);
+
+        $requete = "select ID_COMMANDE as id, DATE_COMMANDE as date, STATUT_PAIEMENT as paiement, ADRESSE_CLIENT as adresse, VILLE_CLIENT as ville,
+                    CP_CLIENT as cp from commandes
+                    inner join clients on clients.ID_CLIENT = commandes.ID_CLIENT
+                    where ID_COMMANDE = :id";
+        $reponse = $connexion->prepare($requete);
+
+        $reponse->bindValue(":id", htmlspecialchars($id), PDO::PARAM_STR);
+
+        $reponse->execute();
+
+        $resultats = $reponse->fetch(PDO::FETCH_ASSOC);
+        
+        return $resultats;
+    }

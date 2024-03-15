@@ -34,6 +34,58 @@ if(isset($_GET["action"]) && $_GET["action"] == "accueil"){
     }
 }
 
+if(isset($_GET["action"]) && $_GET["action"] == "expedition"){
+    require_once("Views/view_menu_expedition.php");
+    if(isset($_POST["action"])){
+        switch($_POST["action"]){
+            case "expe_attente":
+                $titre = "Expéditions";
+                require_once("Views/view_header.php");
+                $expe_attente = getExpeAttente();
+                require_once("Views/view_expedition.php");
+                break;
+    
+            case "expe_en_cours":
+                $titre = "Expéditions";
+                require_once("Views/view_header.php");
+                $expe_en_cours = getExpeEnCours();
+                require_once("Views/view_expedition.php");
+                break;
+            
+            case "expedier":
+                $titre = "Expéditions";
+                require_once("Views/view_header.php");
+                $id = $_POST["id_commande"];
+                $expedier = showBeforeExpe($id);
+                require_once("Views/view_expedition.php");
+                break;
+
+            case "valider_expe":
+                $titre = "Expéditions";
+                require_once("Views/view_header.php");
+                $id = $_POST["id_commande"];
+                echo $id;
+                require_once("Views/view_expedition.php");
+                break;
+    
+
+            case "expe_termine":
+                $titre = "Expéditions";
+                require_once("Views/view_header.php");
+                
+                
+                break;
+
+            case "expe_tout_voir":
+                $titre = "Expéditions";
+                require_once("Views/view_header.php");
+                
+                
+                break;
+        }
+    }
+}
+
 ?>
 
 <script>
