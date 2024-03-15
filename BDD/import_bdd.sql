@@ -54,7 +54,7 @@ CREATE TABLE article(
    QTE_STOCK INT NOT NULL,
    QTE_SAV INT NOT NULL,
    QTE_REBUS INT NOT NULL,
-   PRIMARY KEY(ID_ARTICLE),
+   PRIMARY KEY(ID_ARTICLE)
 ) ENGINE=InnoDB;
 
 CREATE TABLE ligne_commande(
@@ -105,43 +105,23 @@ COMMIT;
 
 -- Création Stock --
 
-INSERT INTO `stock_principal`(`QTE_ART`) 
-VALUES ('50'), ('75'), ('120'), ('90');
+
 
 -- Création Articles --
 
-INSERT INTO `article`(`LIBELLE_ART`, `PRIX_ART`, `COULEUR_ART`, `GARANTIE_ART`, `ID_STOCK`)
-VALUES ('Pergola Aluminium à Toile Enroulable','1720.51','noir','10','1'),
-       ('Pergola Aluminium toit polycarbonate','1611.00','gris','10','2'),
-       ('Portail Coulissant Aluminium peint','2733.98','gris','16','3'),
-       ('Porte Entrée Aluminium','2194.72','noir','10','4');
+-- INSERT INTO `article`(`LIBELLE_ART`, `PRIX_ART`, `COULEUR_ART`, `GARANTIE_ART`, `ID_STOCK`)
+-- VALUES ('Pergola Aluminium à Toile Enroulable','1720.51','noir','10','1'),
+--        ('Pergola Aluminium toit polycarbonate','1611.00','gris','10','2'),
+--        ('Portail Coulissant Aluminium peint','2733.98','gris','16','3'),
+--        ('Porte Entrée Aluminium','2194.72','noir','10','4');
 
 -- Création Lignes Commandes --
 
-INSERT INTO `ligne_commande`(`QTE_COMMANDE`, `ID_ARTICLE`, `ID_COMMANDE`) 
-VALUES ('1','1','1'),
-       ('1','4','1'),
-       ('1','2','2'),
-       ('1','3','2'),
-       ('1','4','2');
+-- INSERT INTO `ligne_commande`(`QTE_COMMANDE`, `ID_ARTICLE`, `ID_COMMANDE`) 
+-- VALUES ('1','1','1'),
+--        ('1','4','1'),
+--        ('1','2','2'),
+--        ('1','3','2'),
+--        ('1','4','2');
 
 -- Trigger Check Total Prix Commande --
-
-DELIMITER $$
-
-CREATE TRIGGER check_total_price
-BEFORE INSERT ON commandes
-FOR EACH ROW
-BEGIN
-    DECLARE total DECIMAL(15, 2);
-    SELECT SUM(a.PRIX_ART * lc.QTE_COMMANDE) INTO total
-    FROM ligne_commande lc
-    INNER JOIN article a ON lc.ID_ARTICLE = a.ID_ARTICLE
-    WHERE lc.ID_COMMANDE = NEW.ID_COMMANDE;
-
-    IF NEW.PRIX_COMMANDE != total THEN
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Erreur dans le prix de la commande';
-    END IF;
-END$$
-
-DELIMITER ;
