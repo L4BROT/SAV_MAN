@@ -20,6 +20,7 @@ if(isset($_GET["action"]) && $_GET["action"] == "accueil"){
                 require_once("Views/view_header.php");
                 $id = $_POST["id_commande"];
                 $commande = getDetailCommandes($id);
+                $articles = getArticlesCommande($id);
                 require("Views/view_accueil.php");
                 break;
         }

@@ -69,3 +69,29 @@
         
         return $resultat;
     }
+    
+    function getArticlesCommande($id){
+        if(file_exists("BDD/param.ini")){
+            $tParam = parse_ini_file("BDD/param.ini", true);
+            extract($tParam["BDD"]);
+        }
+
+        $options = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8");
+
+        $dsn = "mysql:host=$host;port=$port;dbname=$bdd";
+        $connexion = new PDO($dsn, $user, $password, $options);
+
+        $requete = "select LIBELLE_ART, PRIX_ART, COULEUR_ART, GARANTIE_ART from ligne_commande
+                    inner join article on ligne_commande.ID_ARTICLE = article.ID_ARTICLE
+                    where ligne_commande.ID_COMMANDE = :id";
+        $reponse = $connexion->prepare($requete);
+
+        $reponse->bindValue(":id", htmlspecialchars($id), PDO::PARAM_STR);
+
+        $reponse->execute();
+
+        $resultat = $reponse->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $resultat;
+    }
