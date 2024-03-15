@@ -5,13 +5,8 @@
     </form>
 
     <form action="index.php?action=accueil" method="post">
-        <input type="hidden" name="action" value="liste_commandes">
-        <input type="submit" value="Expéditions" class="btn btn-primary position_btn">
-    </form>
-
-    <form action="index.php?action=accueil" method="post">
-        <input type="hidden" name="action" value="liste_commandes">
-        <input type="submit" value="SAV" class="btn btn-primary position_btn">
+        <input type="hidden" name="action" value="articles">
+        <input type="submit" value="Articles" class="btn btn-primary position_btn">
     </form>
 
     <form action="index.php?action=accueil" method="post">

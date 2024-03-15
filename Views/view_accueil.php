@@ -99,4 +99,40 @@
 <?php
     }
 
+    if(isset($listArticles)){
+?>
+        <table id="myTable" class="table table-dark table-striped table-bordered" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Article</th>
+                    <th>Prix</th>
+                    <th>Couleur</th>
+                    <th>Garantie</th>
+                    <th>Qte Stock</th>
+                    <th>Qte SAV</th>
+                    <th>Qte Rebus</th>
+                </tr>
+            </thead>
+            <tbody>
+<?php
+            foreach($listArticles as $listArticle){
+?>
+                <tr>
+                    <td><?php echo $listArticle["nom"]; ?></td>
+                    <td><?php echo $listArticle["prix"] . " €"; ?></td>
+                    <td><?php echo $listArticle["couleur"]; ?></td>
+                    <td><?php echo $listArticle["garantie"] . " Ans"; ?></td>
+                    <td><?php echo $listArticle["stock"]; ?></td>
+                    <td><?php echo $listArticle["sav"]; ?></td>
+                    <td><?php echo $listArticle["rebus"]; ?></td>
+                </tr>
+<?php
+            }
+?>
+            </tbody>
+        </table>
+<?php
+    }
+
+
 require_once("view_footer.php");

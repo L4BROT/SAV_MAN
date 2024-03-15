@@ -95,3 +95,25 @@
         
         return $resultat;
     }
+
+    function getListArticles(){
+        if(file_exists("BDD/param.ini")){
+            $tParam = parse_ini_file("BDD/param.ini", true);
+            extract($tParam["BDD"]);
+        }
+
+        $options = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8");
+
+        $dsn = "mysql:host=$host;port=$port;dbname=$bdd";
+        $connexion = new PDO($dsn, $user, $password, $options);
+
+        $requete = "select LIBELLE_ART as nom, PRIX_ART as prix, COULEUR_ART as couleur, GARANTIE_ART as garantie, QTE_STOCK as stock, QTE_SAV as sav, QTE_REBUS as rebus from article";
+        $reponse = $connexion->prepare($requete);
+
+        $reponse->execute();
+
+        $resultats = $reponse->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $resultats;
+    }

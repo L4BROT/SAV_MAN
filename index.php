@@ -23,6 +23,13 @@ if(isset($_GET["action"]) && $_GET["action"] == "accueil"){
                 $articles = getArticlesCommande($id);
                 require("Views/view_accueil.php");
                 break;
+            
+            case "articles":
+                $titre = "Accueil";
+                require_once("Views/view_header.php");
+                $listArticles = getListArticles();
+                require("Views/view_accueil.php");
+                break;
         }
     }
 }

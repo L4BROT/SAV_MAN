@@ -91,37 +91,38 @@ VALUES ('Terrieur','Alain','5 rue du coin','26260','Le Nord','0707070707'),
        ('Terrieur','Alex','9 rue du coin','26260','Le Nord','0708090102'),
        ('Neymar','Jean','5 rue du Lac','32120','Le Sud','0607270757');
 
--- Création commandes --
-
-INSERT INTO `commandes`(`PRIX_COMMANDE`, `STATUT_PAIEMENT`, `STATUT_EXPEDITION`, `DATE_COMMANDE`, `ID_CLIENT`)
-VALUES ('3915.23','OK','En attente','2024-03-13','1'),
-       ('6539.70','OK','En cours','2024-03-11','2');
-
 -- Création employes --
 
 INSERT INTO `employes` (ID_EMPLOYE, NOM_UTILISATEUR, MDP_UTILISATEUR, TYPE_UTILISATEUR)
 VALUES (2, 'administrateur', 'admin', 'Administrateur');
 COMMIT;
 
--- Création Stock --
-
-
-
 -- Création Articles --
 
--- INSERT INTO `article`(`LIBELLE_ART`, `PRIX_ART`, `COULEUR_ART`, `GARANTIE_ART`, `ID_STOCK`)
--- VALUES ('Pergola Aluminium à Toile Enroulable','1720.51','noir','10','1'),
---        ('Pergola Aluminium toit polycarbonate','1611.00','gris','10','2'),
---        ('Portail Coulissant Aluminium peint','2733.98','gris','16','3'),
---        ('Porte Entrée Aluminium','2194.72','noir','10','4');
+INSERT INTO `article`(`LIBELLE_ART`, `PRIX_ART`, `COULEUR_ART`, `GARANTIE_ART`, `QTE_STOCK`, `QTE_SAV`, `QTE_REBUS`)
+VALUES ('Pergola Aluminium à Toile Enroulable','1720.51','noir','10','75','0','0'),
+       ('Pergola Aluminium toit polycarbonate','1611.00','gris','10','150','0','0'),
+       ('Portail Coulissant Aluminium peint','2733.98','gris','16','95','0','0'),
+       ('Porte Entrée Aluminium','2194.72','noir','10','62','0','0');
+
+-- Création commandes --
+
+INSERT INTO `commandes`(`PRIX_COMMANDE`, `STATUT_PAIEMENT`, `STATUT_EXPEDITION`, `DATE_COMMANDE`, `ID_CLIENT`)
+VALUES ('3915.23','OK','En attente','2024-03-13','1'),
+       ('6539.70','OK','En cours','2024-03-11','2'),
+       ('8260.21','OK','En attente','2024-03-15','3');
 
 -- Création Lignes Commandes --
 
--- INSERT INTO `ligne_commande`(`QTE_COMMANDE`, `ID_ARTICLE`, `ID_COMMANDE`) 
--- VALUES ('1','1','1'),
---        ('1','4','1'),
---        ('1','2','2'),
---        ('1','3','2'),
---        ('1','4','2');
+INSERT INTO `ligne_commande`(`QTE_COMMANDE`, `ID_ARTICLE`, `ID_COMMANDE`) 
+VALUES ('1','1','1'),
+       ('1','4','1'),
+       ('1','2','2'),
+       ('1','3','2'),
+       ('1','1','3'),
+       ('1','4','3'),
+       ('1','2','3'),
+       ('1','3','3'),
+       ('1','4','2');
 
 -- Trigger Check Total Prix Commande --
