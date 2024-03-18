@@ -4,5 +4,5 @@ function confirmLogout() {
 }
 
 function logout() {
-    window.location.href = 'Views/view_connexion.php';
+    window.location.href = "indexCo.php?action=deconnexion";
 }
