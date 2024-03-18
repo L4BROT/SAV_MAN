@@ -3,6 +3,7 @@ session_start(); // Démarrage de la session
 
 // Inclusion du fichier du modèle
 require_once("PHP/modele.inc.php");
+require_once("Views/view_header.php");
 
 // Initialisation de la variable d'erreur
 $error = "";
@@ -60,5 +61,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action']) && $_POST['
             var_dump($error);
         }
     }
+}
+if (isset($_GET['action']) && $_GET['action'] === 'deconnexion') {
+    // Détruire toutes les variables de session
+    $_SESSION = array();
+
+    // Détruire la session
+    session_destroy();
+
+    // Rediriger vers la page de connexion
+    header("Location: Views/view_connexion.php");
+    exit();
 }
 ?>
