@@ -1,35 +1,27 @@
 <?php
-error_reporting(E_ALL);
-ini_set("display_errors", 1);
-
-$titre = "index";
-
+// $titre = "index";
 require_once("PHP/modele.php");
 
-
-
 if(isset($_GET["action"]) && $_GET["action"] == "accueil"){
+    $titre = "accueil";
     require_once("Views/view_header.php");
     require_once("Views/view_menu_accueil.php");
     if(isset($_POST["action"])){
         switch($_POST["action"]){
             case "liste_commandes":
-                $titre = "Accueil";
-               /*if ($typeUtilisateur == 'Admin') {
-                    require_once("Views/view_header_admin.php");
-                }else {
-                    require_once("Views/view_header.php");
-                }
-                $commandes = getListCommandes();
-                require("Views/view_accueil.php");
-                break;*/
+                // $titre = "Accueil";
+                // if ($typeUtilisateur == 'Admin') {
+                //     require_once("Views/view_header_admin.php");
+                // }else {
+                //     require_once("Views/view_header.php");
+                // }
                 require_once("Views/view_header.php");
                 $commandes = getListCommandes();
                 require("Views/view_accueil.php");
                 break;
     
             case "detail_commande":
-                $titre = "Accueil";
+                // $titre = "Accueil";
                 require_once("Views/view_header.php");
                 $id = $_POST["id_commande"];
                 $commande = getDetailCommandes($id);
@@ -38,7 +30,7 @@ if(isset($_GET["action"]) && $_GET["action"] == "accueil"){
                 break;
             
             case "articles":
-                $titre = "Accueil";
+                // $titre = "Accueil";
                 require_once("Views/view_header.php");
                 $listArticles = getListArticles();
                 require("Views/view_accueil.php");

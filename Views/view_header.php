@@ -16,7 +16,7 @@
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
     <script src="JS/alert_deco.js"></script>
     <title>
-        <!-- <?php // echo $titre ?> pose probleme avec la deconnexion et reconnexion -->
+        <?php echo $titre ?>
     </title>
 </head>
 

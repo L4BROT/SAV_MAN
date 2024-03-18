@@ -90,6 +90,7 @@ INSERT INTO `clients`(`NOM_CLIENT`, `PRENOM_CLIENT`, `ADRESSE_CLIENT`, `CP_CLIEN
 VALUES ('Terrieur','Alain','5 rue du coin','26260','Le Nord','0707070707'),
        ('Terrieur','Alex','9 rue du coin','26260','Le Nord','0708090102'),
        ('Neymar','Jean','5 rue du Lac','32120','Le Sud','0607270757');
+COMMIT;
 
 -- Création employes --
 
@@ -104,6 +105,7 @@ VALUES ('Pergola Aluminium à Toile Enroulable','1720.51','noir','10','75','0','
        ('Pergola Aluminium toit polycarbonate','1611.00','gris','10','150','0','0'),
        ('Portail Coulissant Aluminium peint','2733.98','gris','16','95','0','0'),
        ('Porte Entrée Aluminium','2194.72','noir','10','62','0','0');
+COMMIT;
 
 -- Création commandes --
 
@@ -111,6 +113,7 @@ INSERT INTO `commandes`(`PRIX_COMMANDE`, `STATUT_PAIEMENT`, `STATUT_EXPEDITION`,
 VALUES ('3915.23','OK','En attente','2024-03-13','1'),
        ('6539.70','OK','En cours','2024-03-11','2'),
        ('8260.21','OK','En attente','2024-03-15','3');
+COMMIT;
 
 -- Création Lignes Commandes --
 
@@ -124,5 +127,4 @@ VALUES ('1','1','1'),
        ('1','2','3'),
        ('1','3','3'),
        ('1','4','2');
-
--- Trigger Check Total Prix Commande --
+COMMIT;
