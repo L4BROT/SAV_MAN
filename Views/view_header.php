@@ -22,6 +22,7 @@
 
 <body>
 
+
     <nav class="navbar navbar-expand-lg" style="background-color: #3b4f9f;">
         <div class="container-fluid">
             <a class="navbar-brand" href="index.php?action=accueil">LOGO</a>

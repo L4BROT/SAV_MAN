@@ -42,7 +42,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action']) && $_POST['
                 unset($_SESSION['error']);
 
                 // L'utilisateur est authentifié, redirection vers la page d'accueil
-                header("Location: index.php?action=accueil");
+
+
+                header("Location:index.php?action=accueil");
+
                 exit();
             } else {
                 // Nom d'utilisateur ou mot de passe incorrect
@@ -52,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action']) && $_POST['
                 $_SESSION['error'] = $error;
 
                 // Redirection vers la page de connexion avec le message d'erreur
-                header("Location: Views/view_connexion.php");
+                header("Location:Views/view_connexion.php");
                 exit();
             }
         } catch (ModeleException $e) {

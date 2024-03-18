@@ -1,7 +1,4 @@
-<?php
-    $titre = "Accueil";
-    require_once("view_header.php");
-       
+<?php       
     if(isset($commandes)){
 ?>
     <table id="myTable" class="table table-dark table-striped table-bordered" style="width:100%">
@@ -52,7 +49,7 @@
             <tr>
                 <td><?php echo $commande["ID_COMMANDE"]; ?></td>
                 <td><?php echo date('d/m/Y', strtotime($commande["DATE_COMMANDE"])); ?></td>
-                <td><?php echo $commande["PRIX_COMMANDE"]; ?></td>
+                <td><?php echo $commande["PRIX_COMMANDE"] . " €"; ?></td>
                 <td><?php echo $commande["STATUT_PAIEMENT"]; ?></td>
                 <td><?php echo $commande["STATUT_EXPEDITION"]; ?></td>
                 <td>
@@ -66,7 +63,70 @@
     </table>
 <?php
     }
+
+    if(isset($articles)){
 ?>
 
+        <h1 id="titre_art">Contenu :</h1>
+
+        <table id="article_tab" class="table table-dark table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Article</th>
+                    <th>Prix</th>
+                    <th>Couleur</th>
+                    <th>Garantie</th>
+                </tr>
+            </thead>
+            <tbody>
 <?php
-require_once("view_footer.php");
+            foreach($articles as $article){
+?>
+                <tr>
+                    <td><?php echo $article["LIBELLE_ART"]; ?></td>
+                    <td><?php echo $article["PRIX_ART"] . " €"; ?></td>
+                    <td><?php echo $article["COULEUR_ART"]; ?></td>
+                    <td><?php echo $article["GARANTIE_ART"] . " ans."; ?></td>
+                </tr>
+<?php
+            }
+?>
+            </tbody>
+        </table>
+<?php
+    }
+
+    if(isset($listArticles)){
+?>
+        <table id="myTable" class="table table-dark table-striped table-bordered" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Article</th>
+                    <th>Prix</th>
+                    <th>Couleur</th>
+                    <th>Garantie</th>
+                    <th>Qte Stock</th>
+                    <th>Qte SAV</th>
+                    <th>Qte Rebus</th>
+                </tr>
+            </thead>
+            <tbody>
+<?php
+            foreach($listArticles as $listArticle){
+?>
+                <tr>
+                    <td><?php echo $listArticle["nom"]; ?></td>
+                    <td><?php echo $listArticle["prix"] . " €"; ?></td>
+                    <td><?php echo $listArticle["couleur"]; ?></td>
+                    <td><?php echo $listArticle["garantie"] . " Ans"; ?></td>
+                    <td><?php echo $listArticle["stock"]; ?></td>
+                    <td><?php echo $listArticle["sav"]; ?></td>
+                    <td><?php echo $listArticle["rebus"]; ?></td>
+                </tr>
+<?php
+            }
+?>
+            </tbody>
+        </table>
+<?php
+    }
