@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action']) && $_POST['
                 unset($_SESSION['error']);
 
                 // L'utilisateur est authentifié, redirection vers la page d'accueil
-                header("Location: Views/view_accueil.php");
+                header("Location: index.php?action=accueil");
                 exit();
             } else {
                 // Nom d'utilisateur ou mot de passe incorrect
