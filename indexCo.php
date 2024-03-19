@@ -23,7 +23,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action']) && $_POST['
 //var_dump($_SESSION);
 
                 // Redirection vers la page d'accueil
+
                 header("location:index.php?action=accueil");
+
                 exit();
             } else {
                 // Nom d'utilisateur ou mot de passe incorrect
@@ -38,7 +40,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action']) && $_POST['
     }
 
     // Redirection vers la page de connexion avec le message d'erreur
+
     header("location:Views/view_connexion.php");
+
     exit();
 }
 
