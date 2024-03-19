@@ -132,7 +132,7 @@ if(isset($_GET["action"]) && $_GET["action"] == "ticket"){
 if (isset($_POST['key'])) {
     $action = $_POST['key'];
     if ($action == 'creation') {
-        $titre = "Creer un utilisateur";
+        $titre = "Créer un utilisateur";
         require_once("Views/view_header_admin.php");
         
         $nom = $_POST['Nom'];
@@ -186,7 +186,7 @@ if (isset($_POST['key'])) {
 }elseif(isset($_GET['action'])){
     $action = $_GET['action'];
     if ($action == 'creerUtilisateur') {
-        $titre = "Creer un utilisateur";
+        $titre = "Créer un utilisateur";
         require_once("Views/view_header_admin.php");
         require_once("Views/view_creerUtilisateur.php");
         require_once("Views/view_footer.php");

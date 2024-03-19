@@ -19,7 +19,7 @@
 
 <nav class="navbar navbar-expand-lg" style="background-color: #3b4f9f;">
     <div class="container-fluid">
-        <a class="navbar-brand" href="index.php">LOGO</a>
+        <a class="navbar-brand" href="index.php?action=accueil">LOGO</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
         </button>
@@ -30,7 +30,7 @@
                 <a class="nav-link mx-2" style="color: white;" href="index.php?action=dossiers_finis">Dossiers finalisés</a>
                 <a class="nav-link mx-2" style="color: white;" href="index.php?action=expedition">Expéditions</a>
                 <a class="nav-link mx-2" style="color: white;" href="index.php?action=ticket">Tickets</a>
-                <a class="nav-link mx-2" style="color: white;" href="index.php?action=creerUtilisateur">Creer un utilisateur</a>
+                <a class="nav-link mx-2" style="color: white;" href="index.php?action=creerUtilisateur">Créer un utilisateur</a>
                 <a class="nav-link mx-2" style="color: white;" href="index.php?action=afficherUtilisateur">Afficher les utilisateurs</a>
                 <a class="nav-link mx-2" style="color: red;" href="#" onclick="confirmLogout()">Déconnexion</a>
             </div>

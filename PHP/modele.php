@@ -17,7 +17,7 @@
 
     function getListCommandes(){
         $connexion = getBdd();
-        $requete = "select ID_COMMANDE as id, DATE_COMMANDE as date from commandes";
+        $requete = "select ID_COMMANDE as id, DATE_COMMANDE as date, ID_CLIENT as client from commandes";
         $reponse = $connexion->prepare($requete);
 
         $reponse->execute();

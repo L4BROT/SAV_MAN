@@ -5,18 +5,21 @@
     <table id="myTable" class="table table-dark table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
-                <th>Id commande</th>
+                <th class="col-2">Id commande</th>
                 <th>Date</th>
+                <th>Client</th>
                 <th>Détails</th>
             </tr>
         </thead>
         <tbody>
 <?php
         foreach($commandes as $command){
+            $client = getNameUser($command["client"]);
 ?>
             <tr>
                 <td><?php echo $command["id"];?></td>
                 <td><?php echo date('d/m/Y', strtotime($command["date"]));?></td>
+                <td><?php echo $client["nom"] . " " . $client["prenom"];?></td>
                 <td>
                     <form action="index.php?action=accueil" method="post">
                         <input type="hidden" name ="action" value="detail_commande">
