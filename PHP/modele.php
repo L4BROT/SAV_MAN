@@ -184,6 +184,30 @@
         return $resultat;
     }
 
+    function getTicketsExpe(){
+        $connexion = getBdd();
+        $requete = "select * from tickets where MOTIF_TICKET = 'Expédition'";
+        $reponse = $connexion->prepare($requete);
+
+        $reponse->execute();
+
+        $resultat = $reponse->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $resultat;
+    }
+
+    function getAllTickets(){
+        $connexion = getBdd();
+        $requete = "select * from tickets";
+        $reponse = $connexion->prepare($requete);
+
+        $reponse->execute();
+
+        $resultat = $reponse->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $resultat;
+    }
+
     function getNameEmploye($id){
         $connexion = getBdd();
         $requete = "select * from employes where ID_EMPLOYE = :id";
