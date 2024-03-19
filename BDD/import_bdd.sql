@@ -97,14 +97,14 @@ COMMIT;
 
 -- Création employes --
 
-INSERT INTO `employes` (NOM_UTILISATEUR, PRENOM_UTILISATEUR, MDP_UTILISATEUR, TYPE_UTILISATEUR)
-VALUES ('administrateur', 'administrateur', 'admin', 'Admin'),
-       ('Luminio', 'Gregory', 'Luminio+1234', 'Admin'),
-       ('marley', 'bob', 'Marley+1111', 'Hotline'),
-       ('tonton', 'david', 'Tonton!0000', 'Employe'),
-       ('papin', 'jean-pierre', 'JeanP+3333', 'Hotline'),
-       ('Plusdebiere', 'Roger', 'Roger@8585', 'Employe'),
-       ('Dupond', 'jean', 'Jean+0000', 'Employe');
+INSERT INTO `employes` (`ID_EMPLOYE`, `NOM_UTILISATEUR`, `PRENOM_UTILISATEUR`, `MDP_UTILISATEUR`, `TYPE_UTILISATEUR`, `EMAIL`)
+VALUES (2, 'administrateur', '', 'admin', 'Admin', 'admin@example.com'),
+       (6, 'Luminio', 'Gregory', 'Luminio+1234', 'Admin', 'gregory@example.com'),
+       (8, 'marley', 'bob', 'Marley+1111', 'Hotline', 'bob@example.com'),
+       (9, 'tonton', 'david', 'Tonton!0000', 'Employe', 'david@example.com'),
+       (10, 'papin', 'jean-pierre', 'JeanP+3333', 'Hotline', 'jeanpierre@example.com'),
+       (11, 'Plusdebiere', 'Roger', 'Roger@8585', 'Employe', 'roger@example.com'),
+       (12, 'Dupond', 'jean', 'Jean+0000', 'Employe', 'jean@example.com');
 COMMIT;
 
 -- Création Articles --
