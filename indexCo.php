@@ -1,8 +1,9 @@
     <?php
     session_start(); // Démarrage de la session
 
-    // Inclusion du fichier du modèle
-    require_once("PHP/modele.inc.php");
+// Inclusion du fichier du modèle
+require_once("PHP/modele.inc.php");
+require_once("Views/view_header.php");
 
     // Initialisation de la variable d'erreur
     $error = "";

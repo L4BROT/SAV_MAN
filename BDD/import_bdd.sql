@@ -94,8 +94,8 @@ COMMIT;
 
 -- Création employes --
 
-INSERT INTO `employes` (ID_EMPLOYE, NOM_UTILISATEUR, MDP_UTILISATEUR, TYPE_UTILISATEUR)
-VALUES (2, 'administrateur', 'admin', 'Administrateur');
+INSERT INTO `employes` (NOM_UTILISATEUR, PRENOM_UTILISATEUR, MDP_UTILISATEUR, TYPE_UTILISATEUR)
+VALUES ('administrateur', 'administrateur', 'admin', 'Admin');
 COMMIT;
 
 -- Création Articles --
