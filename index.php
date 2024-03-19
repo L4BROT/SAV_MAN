@@ -89,6 +89,10 @@ if(isset($_GET["action"]) && $_GET["action"] == "expedition"){
                 break;
         }
     }
+    else{
+        $allExpe = getAllExpe();
+        require_once("Views/view_expedition.php");
+    }
 }
 
 if(isset($_GET["action"]) && $_GET["action"] == "tickets"){
