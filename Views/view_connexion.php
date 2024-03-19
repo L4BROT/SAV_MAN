@@ -1,8 +1,4 @@
 <?php
-session_start(); // Démarrage de la session
-
-// Inclusion du fichier du modèle
-require_once("PHP/modele.inc.php");
 
 // Initialisation de la variable d'erreur
 $error = isset($_SESSION['error']) ? $_SESSION['error'] : "";
