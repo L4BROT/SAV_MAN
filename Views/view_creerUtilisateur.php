@@ -32,8 +32,8 @@
             </div>
 
             <div>
-                <input type="radio" id="employe" name="btnType" value="Employe" checked/>
-                <label for="louie">Employe</label>
+                <input type="radio" id="employe" name="btnType" value="SAV" checked/>
+                <label for="louie">SAV</label>
             </div>
         </fieldset>
         <input type="hidden" class="form-control"  name="key" aria-describedby="nomHelp" value="creation">
