@@ -56,7 +56,13 @@ if(isset($_GET["action"]) && $_GET["action"] == "accueil"){
 
 if(isset($_GET["action"]) && $_GET["action"] == "expedition"){
     $titre = "Expéditions";
-    require_once("Views/view_header.php");
+    
+    if ($_SESSION['TYPE_UTILISATEUR'] == 'Admin') {
+        require_once("Views/view_header_admin.php");
+    }else {
+        require_once("Views/view_header.php");
+    }
+
     require_once("Views/view_menu_expedition.php");
     if(isset($_POST["action"])){
         switch($_POST["action"]){
@@ -80,6 +86,7 @@ if(isset($_GET["action"]) && $_GET["action"] == "expedition"){
                 $id = $_POST["id_commande"];
                 valider_expe($id);
                 ticketExpe($id);
+                $expeOK = 1;
                 require_once("Views/view_expedition.php");
                 break;
     
@@ -100,9 +107,15 @@ if(isset($_GET["action"]) && $_GET["action"] == "expedition"){
     }
 }
 
-if(isset($_GET["action"]) && $_GET["action"] == "tickets"){
+if(isset($_GET["action"]) && $_GET["action"] == "ticket"){
     $titre = "Tickets";
-    require_once("Views/view_header.php");
+    
+    if ($_SESSION['TYPE_UTILISATEUR'] == 'Admin') {
+        require_once("Views/view_header_admin.php");
+    }else {
+        require_once("Views/view_header.php");
+    }
+
     require_once("Views/view_menu_tickets.php");
     if(isset($_POST["action"])){
         switch($_POST["action"]){

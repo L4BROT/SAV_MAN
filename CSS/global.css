@@ -21,7 +21,10 @@ div.dataTables_wrapper{
 }
 h1{
     text-align: center;
-} 
+}
+h3{
+    text-align: center;
+}
 .alert{
     text-align: center;
 }

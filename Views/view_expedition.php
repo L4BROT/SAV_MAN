@@ -185,3 +185,8 @@ if(isset($expeFinies)){
         </table>
 <?php
     }
+if(isset($expeOK) && $expeOK == 1){
+?>
+    <h3>Commande bien expédiée</h3>
+<?php
+}
