@@ -11,7 +11,7 @@ if (isset($_GET["action"]) && $_GET["action"] == "accueil") {
 
     if ($_SESSION['TYPE_UTILISATEUR'] == 'Admin') {
         require_once("Views/view_header_admin.php");
-    } elseif ($_SESSION['TYPE_UTILISATEUR'] == 'SAV') {
+    }else {
         require_once("Views/view_header.php");
     } else {
         require_once("Views/view_header_hotline.php");
@@ -123,9 +123,9 @@ if (isset($_GET["action"]) && $_GET["action"] == "ticket") {
             case "tickets_sav":
 
 
-                // require_once("Views/view_expedition.php");
+                // require_once("Views/view_tickets.php");
                 break;
-
+            
         }
     }
 }

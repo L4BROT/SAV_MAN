@@ -104,10 +104,10 @@ INSERT INTO `employes` (`NOM_UTILISATEUR`, `PRENOM_UTILISATEUR`, `MDP_UTILISATEU
 VALUES ('administrateur', '', 'admin', 'Admin', 'admin@example.com'),
        ('Luminio', 'Gregory', 'Luminio+1234', 'Admin', 'gregory@example.com'),
        ('marley', 'bob', 'Marley+1111', 'Hotline', 'bob@example.com'),
-       ('tonton', 'david', 'Tonton!0000', 'Employe', 'david@example.com'),
+       ('tonton', 'david', 'Tonton!0000', 'SAV', 'david@example.com'),
        ('papin', 'jean-pierre', 'JeanP+3333', 'Hotline', 'jeanpierre@example.com'),
-       ('Plusdebiere', 'Roger', 'Roger@8585', 'Employe', 'roger@example.com'),
-       ('Dupond', 'jean', 'Jean+0000', 'Employe', 'jean@example.com');
+       ('Plusdebiere', 'Roger', 'Roger@8585', 'SAV', 'roger@example.com'),
+       ('Dupond', 'jean', 'Jean+0000', 'SAV', 'jean@example.com');
 COMMIT;
 
 -- Création Articles --
