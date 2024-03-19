@@ -1,8 +1,11 @@
 <?php
-session_start();
 
 // Inclure le fichier du modèle
 require_once("PHP/modele.inc.php");
+
+if(!isset($_SESSION['TYPE_UTILISATEUR'])){
+    require_once("Views/view_connexion.php");
+
 
 // Vérifier si la soumission du formulaire de connexion
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action']) && $_POST['action'] === 'connexion') {
@@ -41,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action']) && $_POST['
 
     // Redirection vers la page de connexion avec le message d'erreur
 
-    header("location:Views/view_connexion.php");
+    header("location:indexCo.php");
 
     exit();
 }
@@ -56,7 +59,8 @@ if (isset($_GET['action']) && $_GET['action'] === 'deconnexion') {
     unset($_SESSION['TYPE_UTILISATEUR']);
 //var_dump($_SESSION);
     // Rediriger vers la page de connexion
-    header("Location: Views/view_connexion.php");
+    header("location:indexCo.php");
     exit();
+}
 }
 ?>

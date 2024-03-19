@@ -3,7 +3,7 @@ session_start();
 require_once("PHP/modele.php");
 
 if(!isset($_SESSION['TYPE_UTILISATEUR'])){
-    header("location:Views/view_connexion.php");
+    header("location:indexCo.php");
 }
 
 if(isset($_GET["action"]) && $_GET["action"] == "accueil"){
