@@ -25,3 +25,12 @@ h1{
 .alert{
     text-align: center;
 }
+
+@font-face{
+    font-family: 'calibri';
+    src: url('FONTS/calibri-regular.ttf');
+}
+
+body{
+    font-family: 'calibri', sans-serif;
+}
