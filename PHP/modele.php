@@ -105,6 +105,18 @@
         return $resultats;
     }
 
+    function getExpeFinis(){
+        $connexion = getBdd();
+        $requete = "select ID_COMMANDE as id, DATE_COMMANDE as date, STATUT_EXPEDITION as statut, PRIX_COMMANDE as prix from commandes where STATUT_EXPEDITION = 'Livrée'";
+        $reponse = $connexion->prepare($requete);
+
+        $reponse->execute();
+
+        $resultats = $reponse->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $resultats;
+    }
+
     function showBeforeExpe($id){
         $connexion = getBdd();
         $requete = "select ID_COMMANDE as id, DATE_COMMANDE as date, STATUT_PAIEMENT as paiement, ADRESSE_CLIENT as adresse, VILLE_CLIENT as ville,
@@ -161,6 +173,20 @@
     function getTicketsSpec($id){
         $connexion = getBdd();
         $requete = "select * from tickets where ID_COMMANDE = :id";
+        $reponse = $connexion->prepare($requete);
+
+        $reponse->bindValue(":id", htmlspecialchars($id), PDO::PARAM_STR);
+
+        $reponse->execute();
+
+        $resultat = $reponse->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $resultat;
+    }
+
+    function getNameEmploye($id){
+        $connexion = getBdd();
+        $requete = "select * from employes where ID_EMPLOYE = :id";
         $reponse = $connexion->prepare($requete);
 
         $reponse->bindValue(":id", htmlspecialchars($id), PDO::PARAM_STR);

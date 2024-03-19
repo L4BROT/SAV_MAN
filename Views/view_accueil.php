@@ -20,7 +20,7 @@
                 <td>
                     <form action="index.php?action=accueil" method="post">
                         <input type="hidden" name ="action" value="detail_commande">
-                        <input type="hidden" name="id_commande" value="<?php echo $command["id"];?>">
+                        <input type="hidden" name="id_commande" value="<?php echo $command['id'];?>">
                         <input type="submit" value="Voir" class="btn btn-primary">
                     </form>
                 </td>
@@ -96,11 +96,14 @@
             </tbody>
         </table>
 
-        <form action="index.php?action=tickets" method="post" id="btnVoirTickets">
-            <input type="hidden" name ="action" value="tickets_spec">
-            <input type="hidden" name="id_commande" value="<?php echo $command["id"];?>">
-            <input type="submit" value="Voir Tickets" class="btn btn-primary">
-        </form>
+        <div id="btnVoirTickets">
+            <form action="index.php?action=accueil" method="post">
+                <input type="hidden" name ="action" value="tickets_spec">
+                <input type="hidden" name="id_commande" value="<?php echo $id;?>">
+                <input type="submit" value="Voir Tickets" class="btn btn-primary">
+            </form>
+            <button type="reset" class="btn btn-danger"><a href="<?php echo $_SERVER['HTTP_REFERER']; ?>" style="text-decoration:none;color: #FFFFFF">Retour</a></button>
+        </div>
 <?php
     }
 

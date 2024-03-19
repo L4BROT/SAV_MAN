@@ -35,7 +35,17 @@ if(isset($_GET["action"]) && $_GET["action"] == "accueil"){
                 $listArticles = getListArticles();
                 require("Views/view_accueil.php");
                 break;
+
+            case "tickets_spec":
+                $id = $_POST["id_commande"];
+                $tickets_spec = getTicketsSpec($id);
+                require_once("Views/view_tickets.php");
+                break;
         }
+    }else{
+        require_once("Views/view_header.php");
+        $commandes = getListCommandes();
+        require("Views/view_accueil.php");
     }
 }
 
@@ -69,11 +79,12 @@ if(isset($_GET["action"]) && $_GET["action"] == "expedition"){
                 break;
     
             case "expe_termine":
-
+                $expeFinies = getExpeFinis();
+                require_once("Views/view_expedition.php");
                 break;
 
             case "expe_tout_voir":
-                $all_expe = getAllExpe();
+                $allExpe = getAllExpe();
                 require_once("Views/view_expedition.php");
                 break;
         }
@@ -81,7 +92,7 @@ if(isset($_GET["action"]) && $_GET["action"] == "expedition"){
 }
 
 if(isset($_GET["action"]) && $_GET["action"] == "tickets"){
-    $titre = "Expéditions";
+    $titre = "Tickets";
     require_once("Views/view_header.php");
     require_once("Views/view_menu_tickets.php");
     if(isset($_POST["action"])){
@@ -91,13 +102,7 @@ if(isset($_GET["action"]) && $_GET["action"] == "tickets"){
 
                 // require_once("Views/view_expedition.php");
                 break;
-            case "tickets_spec":
-                $id = $_SESSION["id_commande"];
-                // echo $id;
-
-                $tickets_spec = getTicketsSpec($id);
-                require_once("Views/view_tickets.php");
-                break;
+            
         }
     }
 }

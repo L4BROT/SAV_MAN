@@ -43,3 +43,19 @@ div.dataTables_wrapper{
     margin-top: 20px;
     margin-bottom: 20px;
 }
+
+#btn_retour{
+    margin-top: 20px;
+    margin-left: 10%;
+}
+
+#btn_retour_centre{
+    display: flex;
+    margin: auto;
+    margin-top: 20px;
+}
+
+#titre_centre{
+    text-align: center;
+    margin-top: 20px;
+}
