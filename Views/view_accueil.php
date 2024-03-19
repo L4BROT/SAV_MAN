@@ -1,6 +1,7 @@
 <?php       
     if(isset($commandes)){
 ?>
+    <h2 id="titre_art">Toutes les commandes :</h2>
     <table id="myTable" class="table table-dark table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
@@ -34,6 +35,7 @@
 
     if(isset($commande)){
 ?>
+    <h2 id="titre_detail_commande">Détail commande :</h2>
     <table id="detail_commande" class="table table-dark table-striped table-bordered">
         <thead>
             <tr>
@@ -67,7 +69,7 @@
     if(isset($articles)){
 ?>
 
-        <h1 id="titre_art">Contenu :</h1>
+        <h2 id="titre_art">Contenu :</h2>
 
         <table id="article_tab" class="table table-dark table-striped table-bordered">
             <thead>
@@ -93,11 +95,18 @@
 ?>
             </tbody>
         </table>
+
+        <form action="index.php?action=tickets" method="post" id="btnVoirTickets">
+            <input type="hidden" name ="action" value="tickets_spec">
+            <input type="hidden" name="id_commande" value="<?php echo $command["id"];?>">
+            <input type="submit" value="Voir Tickets" class="btn btn-primary">
+        </form>
 <?php
     }
 
     if(isset($listArticles)){
 ?>
+        <h2 id="titre_art">Liste articles :</h2>
         <table id="myTable" class="table table-dark table-striped table-bordered" style="width:100%">
             <thead>
                 <tr>

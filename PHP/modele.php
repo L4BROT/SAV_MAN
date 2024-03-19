@@ -1,17 +1,6 @@
 <?php
     function getDetailCommandes($id){
-
-        if(file_exists("BDD/param.ini")){
-            $tParam = parse_ini_file("BDD/param.ini", true);
-            extract($tParam["BDD"]);
-        }
-
-        define("OPTIONS", array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
-
-        $dsn = "mysql:host=$host;port=$port;dbname=$bdd";
-        $connexion = new PDO($dsn, $user, $password, OPTIONS);
-
+        $connexion = getBdd();
         $requete = "select * from commandes where ID_COMMANDE = :id";
         $reponse = $connexion->prepare($requete);
 
@@ -21,21 +10,13 @@
 
         $resultat = $reponse->fetch(PDO::FETCH_ASSOC);
         
+        $_SESSION["id_commande"] = $id;
+
         return $resultat;
     }
 
     function getListCommandes(){
-        if(file_exists("BDD/param.ini")){
-            $tParam = parse_ini_file("BDD/param.ini", true);
-            extract($tParam["BDD"]);
-        }
-
-        $options = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8");
-
-        $dsn = "mysql:host=$host;port=$port;dbname=$bdd";
-        $connexion = new PDO($dsn, $user, $password, $options);
-
+        $connexion = getBdd();
         $requete = "select ID_COMMANDE as id, DATE_COMMANDE as date from commandes";
         $reponse = $connexion->prepare($requete);
 
@@ -47,17 +28,7 @@
     }
 
     function getNameUser($id){
-        if(file_exists("BDD/param.ini")){
-            $tParam = parse_ini_file("BDD/param.ini", true);
-            extract($tParam["BDD"]);
-        }
-
-        $options = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8");
-
-        $dsn = "mysql:host=$host;port=$port;dbname=$bdd";
-        $connexion = new PDO($dsn, $user, $password, $options);
-
+        $connexion = getBdd();
         $requete = "select NOM_CLIENT as nom, PRENOM_CLIENT as prenom from clients where ID_CLIENT = :id";
         $reponse = $connexion->prepare($requete);
 
@@ -71,17 +42,7 @@
     }
     
     function getArticlesCommande($id){
-        if(file_exists("BDD/param.ini")){
-            $tParam = parse_ini_file("BDD/param.ini", true);
-            extract($tParam["BDD"]);
-        }
-
-        $options = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8");
-
-        $dsn = "mysql:host=$host;port=$port;dbname=$bdd";
-        $connexion = new PDO($dsn, $user, $password, $options);
-
+        $connexion = getBdd();
         $requete = "select LIBELLE_ART, PRIX_ART, COULEUR_ART, GARANTIE_ART from ligne_commande
                     inner join article on ligne_commande.ID_ARTICLE = article.ID_ARTICLE
                     where ligne_commande.ID_COMMANDE = :id";
@@ -97,17 +58,7 @@
     }
 
     function getListArticles(){
-        if(file_exists("BDD/param.ini")){
-            $tParam = parse_ini_file("BDD/param.ini", true);
-            extract($tParam["BDD"]);
-        }
-
-        $options = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8");
-
-        $dsn = "mysql:host=$host;port=$port;dbname=$bdd";
-        $connexion = new PDO($dsn, $user, $password, $options);
-
+        $connexion = getBdd();
         $requete = "select LIBELLE_ART as nom, PRIX_ART as prix, COULEUR_ART as couleur, GARANTIE_ART as garantie, QTE_STOCK as stock, QTE_SAV as sav, QTE_REBUS as rebus from article";
         $reponse = $connexion->prepare($requete);
 
@@ -119,17 +70,7 @@
     }
 
     function getExpeAttente(){
-        if(file_exists("BDD/param.ini")){
-            $tParam = parse_ini_file("BDD/param.ini", true);
-            extract($tParam["BDD"]);
-        }
-
-        $options = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8");
-
-        $dsn = "mysql:host=$host;port=$port;dbname=$bdd";
-        $connexion = new PDO($dsn, $user, $password, $options);
-
+        $connexion = getBdd();
         $requete = "select ID_COMMANDE as id, DATE_COMMANDE as date, STATUT_EXPEDITION as statut from commandes where STATUT_EXPEDITION = 'En attente'";
         $reponse = $connexion->prepare($requete);
 
@@ -141,17 +82,7 @@
     }
 
     function getExpeEnCours(){
-        if(file_exists("BDD/param.ini")){
-            $tParam = parse_ini_file("BDD/param.ini", true);
-            extract($tParam["BDD"]);
-        }
-
-        $options = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8");
-
-        $dsn = "mysql:host=$host;port=$port;dbname=$bdd";
-        $connexion = new PDO($dsn, $user, $password, $options);
-
+        $connexion = getBdd();
         $requete = "select ID_COMMANDE as id, DATE_COMMANDE as date, STATUT_EXPEDITION as statut from commandes where STATUT_EXPEDITION = 'En cours'";
         $reponse = $connexion->prepare($requete);
 
@@ -162,18 +93,20 @@
         return $resultats;
     }
 
+    function getAllExpe(){
+        $connexion = getBdd();
+        $requete = "select ID_COMMANDE as id, DATE_COMMANDE as date, STATUT_EXPEDITION as statut from commandes";
+        $reponse = $connexion->prepare($requete);
+
+        $reponse->execute();
+
+        $resultats = $reponse->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $resultats;
+    }
+
     function showBeforeExpe($id){
-        if(file_exists("BDD/param.ini")){
-            $tParam = parse_ini_file("BDD/param.ini", true);
-            extract($tParam["BDD"]);
-        }
-
-        $options = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8");
-
-        $dsn = "mysql:host=$host;port=$port;dbname=$bdd";
-        $connexion = new PDO($dsn, $user, $password, $options);
-
+        $connexion = getBdd();
         $requete = "select ID_COMMANDE as id, DATE_COMMANDE as date, STATUT_PAIEMENT as paiement, ADRESSE_CLIENT as adresse, VILLE_CLIENT as ville,
                     CP_CLIENT as cp from commandes
                     inner join clients on clients.ID_CLIENT = commandes.ID_CLIENT
@@ -190,23 +123,53 @@
     }
 
     function valider_expe($id){
-        if(file_exists("BDD/param.ini")){
-            $tParam = parse_ini_file("BDD/param.ini", true);
-            extract($tParam["BDD"]);
-        }
-
-        $options = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8");
-
-        $dsn = "mysql:host=$host;port=$port;dbname=$bdd";
-        $connexion = new PDO($dsn, $user, $password, $options);
-
+        $connexion = getBdd();
         $requete = "update commandes set STATUT_EXPEDITION = 'En cours' where ID_COMMANDE = :id";
         $reponse = $connexion->prepare($requete);
 
         $reponse->bindValue(":id", htmlspecialchars($id), PDO::PARAM_STR);
 
         $reponse->execute();
+    }
+
+    function ticketExpe($id){
+        $connexion = getBdd();
+        $requete = "insert into tickets (`DATE_TICKET`, `MOTIF_TICKET`, `ID_EMPLOYE`, `ID_COMMANDE`)
+                    values (DATE(NOW()), 'Expédition', '2', :id)";
+
+        $reponse = $connexion->prepare($requete);
+
+        $reponse->bindValue(":id", htmlspecialchars($id), PDO::PARAM_STR);
+
+        $reponse->execute();
+    }
+
+    function getDateExpe($id){
+        $connexion = getBdd();
+        $requete = "select DATE_TICKET as date from tickets where ID_COMMANDE = :id and MOTIF_TICKET = 'Expédition'";
+        $reponse = $connexion->prepare($requete);
+
+        $reponse->bindValue(":id", htmlspecialchars($id), PDO::PARAM_STR);
+
+        $reponse->execute();
+
+        $resultats = $reponse->fetch(PDO::FETCH_ASSOC);
+        
+        return $resultats;
+    }
+
+    function getTicketsSpec($id){
+        $connexion = getBdd();
+        $requete = "select * from tickets where ID_COMMANDE = :id";
+        $reponse = $connexion->prepare($requete);
+
+        $reponse->bindValue(":id", htmlspecialchars($id), PDO::PARAM_STR);
+
+        $reponse->execute();
+
+        $resultat = $reponse->fetch(PDO::FETCH_ASSOC);
+        
+        return $resultat;
     }
 
     //Creation de l'objet pdo connexion a la bdd

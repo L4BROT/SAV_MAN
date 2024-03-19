@@ -1,5 +1,5 @@
 <?php
-// $titre = "index";
+session_start();
 require_once("PHP/modele.php");
 
 if(isset($_GET["action"]) && $_GET["action"] == "accueil"){
@@ -64,6 +64,7 @@ if(isset($_GET["action"]) && $_GET["action"] == "expedition"){
             case "valider_expe":
                 $id = $_POST["id_commande"];
                 valider_expe($id);
+                ticketExpe($id);
                 require_once("Views/view_expedition.php");
                 break;
     
@@ -72,7 +73,30 @@ if(isset($_GET["action"]) && $_GET["action"] == "expedition"){
                 break;
 
             case "expe_tout_voir":
+                $all_expe = getAllExpe();
+                require_once("Views/view_expedition.php");
+                break;
+        }
+    }
+}
 
+if(isset($_GET["action"]) && $_GET["action"] == "tickets"){
+    $titre = "Expéditions";
+    require_once("Views/view_header.php");
+    require_once("Views/view_menu_tickets.php");
+    if(isset($_POST["action"])){
+        switch($_POST["action"]){
+            case "tickets_sav":
+                
+
+                // require_once("Views/view_expedition.php");
+                break;
+            case "tickets_spec":
+                $id = $_SESSION["id_commande"];
+                // echo $id;
+
+                $tickets_spec = getTicketsSpec($id);
+                require_once("Views/view_tickets.php");
                 break;
         }
     }
@@ -201,8 +225,8 @@ if (isset($_POST['key'])) {
             loadingRecords: "Chargement...",
             processing: "Traitement...",
             lengthMenu: "",
-            search: "Rechercher une commande : ",
-            zeroRecords: "Aucune commande trouvée",
+            search: "Rechercher : ",
+            zeroRecords: "Aucun résultat",
             
             paginate: {
                 first: "Premier",

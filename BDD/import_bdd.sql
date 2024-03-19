@@ -70,8 +70,11 @@ CREATE TABLE ligne_commande(
 CREATE TABLE retour_SAV(
    ID_RETOUR INT AUTO_INCREMENT,
    QTE_RETOUR INT NOT NULL,
+   MOTIF_RETOUR VARCHAR(50) NOT NULL,
+   ID_ARTICLE INT NOT NULL,
    ID_TICKET INT NOT NULL,
    PRIMARY KEY(ID_RETOUR),
+   FOREIGN KEY(ID_ARTICLE) REFERENCES article(ID_ARTICLE),
    FOREIGN KEY(ID_TICKET) REFERENCES tickets(ID_TICKET)
 ) ENGINE=InnoDB;
 
@@ -95,7 +98,13 @@ COMMIT;
 -- Création employes --
 
 INSERT INTO `employes` (NOM_UTILISATEUR, PRENOM_UTILISATEUR, MDP_UTILISATEUR, TYPE_UTILISATEUR)
-VALUES ('administrateur', 'administrateur', 'admin', 'Admin');
+VALUES ('administrateur', 'administrateur', 'admin', 'Admin'),
+       ('Luminio', 'Gregory', 'Luminio+1234', 'Admin'),
+       ('marley', 'bob', 'Marley+1111', 'Hotline'),
+       ('tonton', 'david', 'Tonton!0000', 'Employe'),
+       ('papin', 'jean-pierre', 'JeanP+3333', 'Hotline'),
+       ('Plusdebiere', 'Roger', 'Roger@8585', 'Employe'),
+       ('Dupond', 'jean', 'Jean+0000', 'Employe');
 COMMIT;
 
 -- Création Articles --
@@ -112,7 +121,8 @@ COMMIT;
 INSERT INTO `commandes`(`PRIX_COMMANDE`, `STATUT_PAIEMENT`, `STATUT_EXPEDITION`, `DATE_COMMANDE`, `ID_CLIENT`)
 VALUES ('3915.23','OK','En attente','2024-03-13','1'),
        ('6539.70','OK','En cours','2024-03-11','2'),
-       ('8260.21','OK','En attente','2024-03-15','3');
+       ('8260.21','OK','En attente','2024-03-15','3'),
+       ('8260.21','OK','Livrée','2024-03-12','2');
 COMMIT;
 
 -- Création Lignes Commandes --
@@ -126,5 +136,13 @@ VALUES ('1','1','1'),
        ('1','4','3'),
        ('1','2','3'),
        ('1','3','3'),
-       ('1','4','2');
+       ('1','4','4'),
+       ('1','1','4'),
+       ('1','2','4'),
+       ('1','3','4');
+COMMIT;
+
+INSERT INTO `tickets`(`DATE_TICKET`, `MOTIF_TICKET`, `ID_EMPLOYE`, `ID_COMMANDE`)
+VALUES ('2024-03-18','Expédition','2','2'),
+       ('2024-03-15','Expédition','2','4');
 COMMIT;
