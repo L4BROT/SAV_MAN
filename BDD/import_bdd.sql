@@ -9,8 +9,9 @@ CREATE TABLE employes(
    ID_EMPLOYE INT AUTO_INCREMENT,
    NOM_UTILISATEUR VARCHAR(50) NOT NULL,
    PRENOM_UTILISATEUR VARCHAR(50) NOT NULL,
-   MDP_UTILISATEUR VARCHAR(50) NOT NULL,
+   MDP_UTILISATEUR VARCHAR(100) NOT NULL,
    TYPE_UTILISATEUR VARCHAR(50) NOT NULL,
+   EMAIL varchar(255) DEFAULT NULL,
    PRIMARY KEY(ID_EMPLOYE)
 ) ENGINE=InnoDB;
 
@@ -99,14 +100,14 @@ COMMIT;
 
 -- Création employes --
 
-INSERT INTO `employes` (`ID_EMPLOYE`, `NOM_UTILISATEUR`, `PRENOM_UTILISATEUR`, `MDP_UTILISATEUR`, `TYPE_UTILISATEUR`, `EMAIL`)
-VALUES (2, 'administrateur', '', 'admin', 'Admin', 'admin@example.com'),
-       (6, 'Luminio', 'Gregory', 'Luminio+1234', 'Admin', 'gregory@example.com'),
-       (8, 'marley', 'bob', 'Marley+1111', 'Hotline', 'bob@example.com'),
-       (9, 'tonton', 'david', 'Tonton!0000', 'Employe', 'david@example.com'),
-       (10, 'papin', 'jean-pierre', 'JeanP+3333', 'Hotline', 'jeanpierre@example.com'),
-       (11, 'Plusdebiere', 'Roger', 'Roger@8585', 'Employe', 'roger@example.com'),
-       (12, 'Dupond', 'jean', 'Jean+0000', 'Employe', 'jean@example.com');
+INSERT INTO `employes` (`NOM_UTILISATEUR`, `PRENOM_UTILISATEUR`, `MDP_UTILISATEUR`, `TYPE_UTILISATEUR`, `EMAIL`)
+VALUES ('administrateur', '', 'admin', 'Admin', 'admin@example.com'),
+       ('Luminio', 'Gregory', 'Luminio+1234', 'Admin', 'gregory@example.com'),
+       ('marley', 'bob', 'Marley+1111', 'Hotline', 'bob@example.com'),
+       ('tonton', 'david', 'Tonton!0000', 'Employe', 'david@example.com'),
+       ('papin', 'jean-pierre', 'JeanP+3333', 'Hotline', 'jeanpierre@example.com'),
+       ('Plusdebiere', 'Roger', 'Roger@8585', 'Employe', 'roger@example.com'),
+       ('Dupond', 'jean', 'Jean+0000', 'Employe', 'jean@example.com');
 COMMIT;
 
 -- Création Articles --
