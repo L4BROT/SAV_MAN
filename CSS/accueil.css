@@ -19,7 +19,6 @@ div.dataTables_wrapper{
 #detail_commande{
     width: 80%;
     margin: auto;
-    border-radius: 20px;
 }
 
 #article_tab{
@@ -31,4 +30,16 @@ div.dataTables_wrapper{
 #titre_art{
     margin-left: 10%;
     margin-top: 20px;
+}
+
+#titre_detail_commande{
+    margin-left: 10%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.titre_expe{
+    margin-left: 10%;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
