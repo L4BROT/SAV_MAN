@@ -43,6 +43,7 @@
             <tr>
                 <th>Id commande</th>
                 <th>Date expédition</th>
+                <th>Employé</th>
                 <th>Statut expédition</th>
             </tr>
         </thead>
@@ -52,6 +53,16 @@
             $id = $expe["id"];
             $date_expe = getDateExpe($id);
         
+            if($expe["statut"] == "En cours" || $expe["statut"] == "Livrée"){
+                $employe = idEmployeFromCom($id);
+                $res = $employe["ID_EMPLOYE"];
+                $val = getNameEmploye($res);
+                $nom = $val["NOM_UTILISATEUR"] . " " . $val["PRENOM_UTILISATEUR"];
+            }
+            else{
+                $nom = "";
+            }
+
             if($date_expe == false){
                 $date_expe = "En attente";
             }
@@ -63,6 +74,7 @@
             <tr>
                 <td><?php echo $expe["id"];?></td>
                 <td><?php echo $date_expe;?></td>
+                <td><?php echo $nom;?></td>
                 <td><?php echo $expe["statut"];?></td>
             </tr>
 <?php
@@ -116,6 +128,7 @@
             <tr>
                 <th>Id commande</th>
                 <th>Date expédition</th>
+                <th>Employé</th>
                 <th>Statut expédition</th>
             </tr>
         </thead>
@@ -124,9 +137,19 @@
         foreach($allExpe as $expe){
             $id = $expe["id"];
             $date_expe = getDateExpe($id);
+
+            if($expe["statut"] == "En cours" || $expe["statut"] == "Livrée"){
+                $employe = idEmployeFromCom($id);
+                $res = $employe["ID_EMPLOYE"];
+                $val = getNameEmploye($res);
+                $nom = $val["NOM_UTILISATEUR"] . " " . $val["PRENOM_UTILISATEUR"];
+            }
+            else{
+                $nom = "";
+            }
         
             if($date_expe == false){
-                $date_expe = "En attente";
+                $date_expe = "";
             }
             else{
                 $date_expe = date('d/m/Y', strtotime($date_expe["date"]));
@@ -136,6 +159,7 @@
             <tr>
                 <td><?php echo $expe["id"];?></td>
                 <td><?php echo $date_expe;?></td>
+                <td><?php echo $nom;?></td>
                 <td><?php echo $expe["statut"];?></td>
             </tr>
 <?php
@@ -154,6 +178,7 @@ if(isset($expeFinies)){
             <tr>
                 <th>Id commande</th>
                 <th>Date expédition</th>
+                <th>Employé</th>
                 <th>Prix commande</th>
                 <th>Statut expédition</th>
             </tr>
@@ -164,6 +189,16 @@ if(isset($expeFinies)){
             $id = $expe["id"];
             $date_expe = getDateExpe($id);
         
+            if($expe["statut"] == "En cours" || $expe["statut"] == "Livrée"){
+                $employe = idEmployeFromCom($id);
+                $res = $employe["ID_EMPLOYE"];
+                $val = getNameEmploye($res);
+                $nom = $val["NOM_UTILISATEUR"] . " " . $val["PRENOM_UTILISATEUR"];
+            }
+            else{
+                $nom = "";
+            }
+
             if($date_expe == false){
                 $date_expe = "En attente";
             }
@@ -175,6 +210,7 @@ if(isset($expeFinies)){
             <tr>
                 <td><?php echo $expe["id"];?></td>
                 <td><?php echo $date_expe;?></td>
+                <td><?php echo $nom;?></td>
                 <td><?php echo $expe["prix"] . " €";?></td>
                 <td><?php echo $expe["statut"];?></td>
             </tr>

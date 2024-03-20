@@ -240,6 +240,21 @@
         return $resultat;
     }
 
+    // Donne l'ID de l'employé qui a envoyé une commande, depuis un ID commande
+    function idEmployeFromCom($id){
+        $connexion = getBdd();
+        $requete = "select ID_EMPLOYE from tickets where ID_COMMANDE = :id and MOTIF_TICKET = 'Expédition'";
+        $reponse = $connexion->prepare($requete);
+
+        $reponse->bindValue(":id", htmlspecialchars($id), PDO::PARAM_STR);
+
+        $reponse->execute();
+
+        $resultat = $reponse->fetch(PDO::FETCH_ASSOC);
+        
+        return $resultat;
+    }
+
     //Creation de l'objet pdo connexion a la bdd
     function getBdd() {
         //Recuperation des parametre de connexion
