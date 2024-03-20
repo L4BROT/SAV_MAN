@@ -37,7 +37,7 @@
                     <a class="nav-link mx-2" style="color: white;" href="index.php?action=dossiers_finis">Dossiers
                         finalisés</a>
                     <a class="nav-link mx-2" style="color: white;" href="index.php?action=expedition">Expéditions</a>
-                    <a class="nav-link mx-2" style="color: white;" href="index.php?action=tickets">Tickets</a>
+                    <a class="nav-link mx-2" style="color: white;" href="index.php?action=ticket">Tickets</a>
                     <a class="nav-link mx-2" style="color: red;" href="#" onclick="confirmLogout()">Déconnexion</a>
                 </div>
             </div>
