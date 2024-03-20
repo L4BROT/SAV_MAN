@@ -150,6 +150,11 @@ if (isset($_GET["action"]) && $_GET["action"] == "ticket") {
                 $allTickets = getAllTickets();
                 require_once("Views/view_tickets.php");
                 break;
+
+            case "crea_ticket":
+                $creaTicket = true;
+                require_once("Views/view_tickets.php");
+                break;
         }
     }
     else{

@@ -1,5 +1,5 @@
 <?php
-if (isset ($tickets_spec)) {
+if (isset($tickets_spec)) {
     if ($tickets_spec == false) {
         ?>
         <h3 id="titre_centre">Il n'y a pas de tickets pour la commande n°
@@ -52,7 +52,7 @@ if (isset ($tickets_spec)) {
     }
 }
 
-if (isset ($tickets_expe)) {
+if (isset($tickets_expe)) {
     ?>
     <h2 class="titre_expe">Tickets expéditions</h2>
     <table id="myTable" class="table table-dark table-striped table-bordered">
@@ -93,7 +93,7 @@ if (isset ($tickets_expe)) {
     <?php
 }
 
-if (isset ($allTickets)) {
+if (isset($allTickets)) {
     ?>
     <h2 class="titre_expe">Tous les tickets</h2>
     <table id="myTable" class="table table-dark table-striped table-bordered">
@@ -133,3 +133,29 @@ if (isset ($allTickets)) {
             style="text-decoration:none;color: #FFFFFF">Retour</a></button>
     <?php
 }
+
+if (isset($creaTicket)) {
+    ?>
+    <!-- Affichage du formulaire de création de ticket -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title text-center mb-4">Créer un nouveau ticket</h2>
+                        <form action="index.php?action=ticket" method="post">
+                            <div class="form-group">
+                                <label for="motif_ticket">Motif du ticket :</label>
+                                <input type="text" class="form-control" id="motif_ticket" name="motif_ticket" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block mt-2">Créer le ticket</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php
+}
+
+?>
