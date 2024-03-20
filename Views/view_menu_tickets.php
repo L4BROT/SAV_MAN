@@ -13,4 +13,5 @@
         <input type="hidden" name="action" value="all_tickets">
         <input type="submit" value="Tout voir" class="btn btn-primary position_btn">
     </form>
+
 </div>
