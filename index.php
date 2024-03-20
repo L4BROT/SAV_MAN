@@ -168,6 +168,17 @@ if (isset($_GET["action"]) && $_GET["action"] == "ticket") {
 
             case "crea_ticket":
                 $creaTicket = true;
+                $_SESSION["id_commande"] = $_POST["id_commande"];
+                $_SESSION["id_employe"] = $_POST["id_employe"];
+                require_once("Views/view_tickets.php");
+                break;
+            
+            case "validerCrea":
+                $id = $_SESSION["id_commande"];
+                $id_employe = $_SESSION["id_employe"];
+                $motif_ticket = $_POST["motif_ticket"];
+                creaTicket($id, $id_employe, $motif_ticket);
+                $creaOK = true;
                 require_once("Views/view_tickets.php");
                 break;
         }

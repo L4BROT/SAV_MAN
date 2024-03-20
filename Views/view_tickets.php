@@ -143,19 +143,34 @@ if (isset($creaTicket)) {
                 <div class="card">
                     <div class="card-body">
                         <h2 class="card-title text-center mb-4">Créer un nouveau ticket</h2>
+                        <p>Commande n°<?php echo $_SESSION["id_commande"]; ?></p>
+                        <p>Employé : 
+                            <?php 
+                                $nom = getNameEmploye($_SESSION["id_employe"]);
+                                echo $nom["NOM_UTILISATEUR"] . " " . $nom["PRENOM_UTILISATEUR"];
+                            ?>
+                        </p>
                         <form action="index.php?action=ticket" method="post">
                             <div class="form-group">
                                 <label for="motif_ticket">Motif du ticket :</label>
                                 <input type="text" class="form-control" id="motif_ticket" name="motif_ticket" required>
                             </div>
+                            <input type="hidden" name="action" value="validerCrea" />
                             <button type="submit" class="btn btn-primary btn-block mt-2">Créer le ticket</button>
+                            <button type="reset" class="btn btn-danger btn-block mt-2"><a href="<?php echo $_SERVER['HTTP_REFERER']; ?>" style="text-decoration:none;color: #FFFFFF">Retour</a></button>
                         </form>
                     </div>
                 </div>
+                
             </div>
         </div>
     </div>
     <?php
 }
 
+if (isset($creaOK)) {
+?>
+    <h2 id="titre_centre">Ticket bien crée</h2>
+<?php
+}
 ?>

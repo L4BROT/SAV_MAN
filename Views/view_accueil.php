@@ -131,6 +131,8 @@ if (isset($articles)) {
         </form>
         <form action="index.php?action=ticket" method="post" class="mr-1">
             <input type="hidden" name="action" value="crea_ticket">
+            <input type="hidden" name="id_commande" value="<?php echo $id; ?>">
+            <input type="hidden" name="id_employe" value="<?php echo $_SESSION["ID_EMPLOYE"]; ?>">
             <input type="submit" value="Créer un ticket" class="btn btn-primary">
         </form>
         <form action="<?php echo $_SERVER['HTTP_REFERER']; ?>" method="post">
