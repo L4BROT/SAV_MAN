@@ -1,4 +1,5 @@
 <?php
+    // Donne toutes les informations d'une seule commande en recherche par ID
     function getDetailCommandes($id){
         $connexion = getBdd();
         $requete = "select * from commandes where ID_COMMANDE = :id";
@@ -15,6 +16,7 @@
         return $resultat;
     }
 
+    // Donne les informations de toutes les commandes
     function getListCommandes(){
         $connexion = getBdd();
         $requete = "select ID_COMMANDE as id, DATE_COMMANDE as date, ID_CLIENT as client from commandes";
@@ -144,14 +146,15 @@
         $reponse->execute();
     }
 
-    function ticketExpe($id){
+    function ticketExpe($id, $employe){
         $connexion = getBdd();
         $requete = "insert into tickets (`DATE_TICKET`, `MOTIF_TICKET`, `ID_EMPLOYE`, `ID_COMMANDE`)
-                    values (DATE(NOW()), 'Expédition', '2', :id)";
+                    values (DATE(NOW()), 'Expédition', :employe, :id)";
 
         $reponse = $connexion->prepare($requete);
 
         $reponse->bindValue(":id", htmlspecialchars($id), PDO::PARAM_STR);
+        $reponse->bindValue(":employe", htmlspecialchars($employe), PDO::PARAM_STR);
 
         $reponse->execute();
     }

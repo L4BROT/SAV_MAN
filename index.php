@@ -97,7 +97,8 @@ if (isset($_GET["action"]) && $_GET["action"] == "expedition") {
             case "valider_expe":
                 $id = $_POST["id_commande"];
                 valider_expe($id);
-                ticketExpe($id);
+                $employe = $_SESSION['ID_EMPLOYE'];
+                ticketExpe($id, $employe);
                 $expeOK = 1;
                 require_once("Views/view_expedition.php");
                 break;
@@ -140,7 +141,20 @@ if (isset($_GET["action"]) && $_GET["action"] == "ticket") {
                 // require_once("Views/view_tickets.php");
                 break;
             
+            case "tickets_expe":
+                $tickets_expe = getTicketsExpe();
+                require_once("Views/view_tickets.php");
+                break;
+
+            case "all_tickets":
+                $allTickets = getAllTickets();
+                require_once("Views/view_tickets.php");
+                break;
         }
+    }
+    else{
+        $allTickets = getAllTickets();
+        require_once("Views/view_tickets.php");
     }
 }
 
