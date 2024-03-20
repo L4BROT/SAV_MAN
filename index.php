@@ -9,11 +9,13 @@ if (!isset($_SESSION['TYPE_UTILISATEUR'])) {
 if (isset($_GET["action"]) && $_GET["action"] == "accueil") {
     $titre = "accueil";
 
-    if ($_SESSION['TYPE_UTILISATEUR'] == 'Admin') {
+    if ($_SESSION['TYPE_UTILISATEUR'] == 'Admin'){
         require_once("Views/view_header_admin.php");
-    }else {
+    }
+    else if($_SESSION['TYPE_UTILISATEUR'] == 'SAV'){
         require_once("Views/view_header.php");
-    } else {
+    } 
+    else {
         require_once("Views/view_header_hotline.php");
     }
 
@@ -47,8 +49,12 @@ if (isset($_GET["action"]) && $_GET["action"] == "accueil") {
     } else {
         if ($_SESSION['TYPE_UTILISATEUR'] == 'Admin') {
             require_once("Views/view_header_admin.php");
-        } else {
+        }
+        else if($_SESSION['TYPE_UTILISATEUR'] == 'SAV'){
             require_once("Views/view_header.php");
+        } 
+        else {
+            require_once("Views/view_header_hotline.php");
         }
 
         $commandes = getListCommandes();
@@ -61,8 +67,12 @@ if (isset($_GET["action"]) && $_GET["action"] == "expedition") {
 
     if ($_SESSION['TYPE_UTILISATEUR'] == 'Admin') {
         require_once("Views/view_header_admin.php");
-    } else {
+    }
+    else if($_SESSION['TYPE_UTILISATEUR'] == 'SAV'){
         require_once("Views/view_header.php");
+    } 
+    else {
+        require_once("Views/view_header_hotline.php");
     }
 
     require_once("Views/view_menu_expedition.php");
@@ -113,8 +123,12 @@ if (isset($_GET["action"]) && $_GET["action"] == "ticket") {
 
     if ($_SESSION['TYPE_UTILISATEUR'] == 'Admin') {
         require_once("Views/view_header_admin.php");
-    } else {
+    }
+    else if($_SESSION['TYPE_UTILISATEUR'] == 'SAV'){
         require_once("Views/view_header.php");
+    } 
+    else {
+        require_once("Views/view_header_hotline.php");
     }
 
     require_once("Views/view_menu_tickets.php");
