@@ -23,7 +23,7 @@ function verifyUserlog($username, $password) {
     $query->bindParam(':pass', $password, PDO::PARAM_STR);
     $query->execute();
 
-    $user = $query->fetchAll(PDO::FETCH_ASSOC);
+    $user = $query->fetch(PDO::FETCH_ASSOC);
 
     return $user;
 }

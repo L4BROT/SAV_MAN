@@ -20,9 +20,9 @@ if (!isset($_SESSION['TYPE_UTILISATEUR'])) {
 
                 if ($user) {
                     // Stocker les informations de l'utilisateur dans la session
-                    $_SESSION['ID_EMPLOYE'] = $user[0]['ID_EMPLOYE'];
-                    $_SESSION['EMAIL'] = $user[0]['EMAIL'];
-                    $_SESSION['TYPE_UTILISATEUR'] = $user[0]['TYPE_UTILISATEUR'];
+                    $_SESSION['ID_EMPLOYE'] = $user['ID_EMPLOYE'];
+                    $_SESSION['EMAIL'] = $user['EMAIL'];
+                    $_SESSION['TYPE_UTILISATEUR'] = $user['TYPE_UTILISATEUR'];
                     //var_dump($_SESSION);
 
                     // Redirection vers la page d'accueil
