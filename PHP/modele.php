@@ -29,6 +29,7 @@
         return $resultats;
     }
 
+    // Donne le nom et le prénom d'un client avec son ID
     function getNameUser($id){
         $connexion = getBdd();
         $requete = "select NOM_CLIENT as nom, PRENOM_CLIENT as prenom from clients where ID_CLIENT = :id";
@@ -43,6 +44,7 @@
         return $resultat;
     }
     
+    // Donne tous les articles rattachés à une commande avec l'ID commande
     function getArticlesCommande($id){
         $connexion = getBdd();
         $requete = "select LIBELLE_ART, PRIX_ART, COULEUR_ART, GARANTIE_ART from ligne_commande
@@ -59,6 +61,7 @@
         return $resultat;
     }
 
+    // Donne toutes les informations de toutes les commandes
     function getListArticles(){
         $connexion = getBdd();
         $requete = "select LIBELLE_ART as nom, PRIX_ART as prix, COULEUR_ART as couleur, GARANTIE_ART as garantie, QTE_STOCK as stock, QTE_SAV as sav, QTE_REBUS as rebus from article";
@@ -71,6 +74,7 @@
         return $resultats;
     }
 
+    // Donne toutes les commandes avec des expéditions en attente
     function getExpeAttente(){
         $connexion = getBdd();
         $requete = "select ID_COMMANDE as id, DATE_COMMANDE as date, STATUT_EXPEDITION as statut from commandes where STATUT_EXPEDITION = 'En attente'";
@@ -83,6 +87,7 @@
         return $resultats;
     }
 
+    // Donne toutes les commandes avec des expéditions en cours
     function getExpeEnCours(){
         $connexion = getBdd();
         $requete = "select ID_COMMANDE as id, DATE_COMMANDE as date, STATUT_EXPEDITION as statut from commandes where STATUT_EXPEDITION = 'En cours'";
@@ -95,6 +100,7 @@
         return $resultats;
     }
 
+    // Donne toutes les expéditions sans filtre
     function getAllExpe(){
         $connexion = getBdd();
         $requete = "select ID_COMMANDE as id, DATE_COMMANDE as date, STATUT_EXPEDITION as statut from commandes";
@@ -107,6 +113,7 @@
         return $resultats;
     }
 
+    // Donne toutes les expéditions terminées
     function getExpeFinis(){
         $connexion = getBdd();
         $requete = "select ID_COMMANDE as id, DATE_COMMANDE as date, STATUT_EXPEDITION as statut, PRIX_COMMANDE as prix from commandes where STATUT_EXPEDITION = 'Livrée'";
@@ -119,6 +126,7 @@
         return $resultats;
     }
 
+    // Donne les informations d'une seule commande au statut "en attente" de livraison, depuis son ID
     function showBeforeExpe($id){
         $connexion = getBdd();
         $requete = "select ID_COMMANDE as id, DATE_COMMANDE as date, STATUT_PAIEMENT as paiement, ADRESSE_CLIENT as adresse, VILLE_CLIENT as ville,
@@ -136,6 +144,7 @@
         return $resultats;
     }
 
+    // Valide une expédition, modifie le statut d'une commande "En attente" à "En cours", depuis son ID
     function valider_expe($id){
         $connexion = getBdd();
         $requete = "update commandes set STATUT_EXPEDITION = 'En cours' where ID_COMMANDE = :id";
@@ -146,6 +155,7 @@
         $reponse->execute();
     }
 
+    // Crée un ticket expédition après la validation d'une expédition
     function ticketExpe($id, $employe){
         $connexion = getBdd();
         $requete = "insert into tickets (`DATE_TICKET`, `MOTIF_TICKET`, `ID_EMPLOYE`, `ID_COMMANDE`)
@@ -159,6 +169,7 @@
         $reponse->execute();
     }
 
+    // Donne la date d'expédition d'une commande depuis son ID
     function getDateExpe($id){
         $connexion = getBdd();
         $requete = "select DATE_TICKET as date from tickets where ID_COMMANDE = :id and MOTIF_TICKET = 'Expédition'";
@@ -173,6 +184,7 @@
         return $resultats;
     }
 
+    // Sort tous les tickets relatifs à une commande depuis l'ID de la commande
     function getTicketsSpec($id){
         $connexion = getBdd();
         $requete = "select * from tickets where ID_COMMANDE = :id";
@@ -187,6 +199,7 @@
         return $resultat;
     }
 
+    // Donne tous les tickets d'expédition
     function getTicketsExpe(){
         $connexion = getBdd();
         $requete = "select * from tickets where MOTIF_TICKET = 'Expédition'";
@@ -199,6 +212,7 @@
         return $resultat;
     }
 
+    // Donne tous les tickets confondus
     function getAllTickets(){
         $connexion = getBdd();
         $requete = "select * from tickets";
@@ -211,6 +225,7 @@
         return $resultat;
     }
 
+    // Donne le nom et le prénom d'un employé depuis son ID
     function getNameEmploye($id){
         $connexion = getBdd();
         $requete = "select * from employes where ID_EMPLOYE = :id";

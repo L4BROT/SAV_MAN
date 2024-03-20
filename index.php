@@ -2,13 +2,16 @@
 session_start();
 require_once("PHP/modele.php");
 
+// Test la connexion, et redirige si aucun utilisateur connecté
 if (!isset($_SESSION['TYPE_UTILISATEUR'])) {
     header("location:indexCo.php");
 }
 
+// Affichage onglet accueil
 if (isset($_GET["action"]) && $_GET["action"] == "accueil") {
     $titre = "accueil";
 
+    // Affichage dynamique de la navbar suivant le niveau d'autorisation
     if ($_SESSION['TYPE_UTILISATEUR'] == 'Admin'){
         require_once("Views/view_header_admin.php");
     }
@@ -19,8 +22,10 @@ if (isset($_GET["action"]) && $_GET["action"] == "accueil") {
         require_once("Views/view_header_hotline.php");
     }
 
+    // Affichage sous-menu de la page accueil (Commandes, Articles)
     require_once("Views/view_menu_accueil.php");
 
+    // Affichage des scénarios page accueil
     if (isset($_POST["action"])) {
         switch ($_POST["action"]) {
             case "liste_commandes":
@@ -62,9 +67,11 @@ if (isset($_GET["action"]) && $_GET["action"] == "accueil") {
     }
 }
 
+// Affichage onglet Expédition
 if (isset($_GET["action"]) && $_GET["action"] == "expedition") {
     $titre = "Expéditions";
 
+    // Affichage dynamique de la navbar suivant le niveau d'autorisation
     if ($_SESSION['TYPE_UTILISATEUR'] == 'Admin') {
         require_once("Views/view_header_admin.php");
     }
@@ -75,7 +82,10 @@ if (isset($_GET["action"]) && $_GET["action"] == "expedition") {
         require_once("Views/view_header_hotline.php");
     }
 
+    // Affichage sous-menu expédition
     require_once("Views/view_menu_expedition.php");
+
+    // Affichage des scénarios page expédition
     if (isset($_POST["action"])) {
         switch ($_POST["action"]) {
             case "expe_attente":
@@ -119,9 +129,11 @@ if (isset($_GET["action"]) && $_GET["action"] == "expedition") {
     }
 }
 
+// Affichage onglet Tickets
 if (isset($_GET["action"]) && $_GET["action"] == "ticket") {
     $titre = "Tickets";
 
+    // Affichage dynamique de la navbar suivant le niveau d'autorisation
     if ($_SESSION['TYPE_UTILISATEUR'] == 'Admin') {
         require_once("Views/view_header_admin.php");
     }
@@ -132,7 +144,10 @@ if (isset($_GET["action"]) && $_GET["action"] == "ticket") {
         require_once("Views/view_header_hotline.php");
     }
 
+    // Affichage sous-menu tickets
     require_once("Views/view_menu_tickets.php");
+    
+    // Affichage des scénarios page tickets
     if (isset($_POST["action"])) {
         switch ($_POST["action"]) {
             case "tickets_sav":
@@ -268,6 +283,7 @@ if (isset($_POST['key'])) {
 
 ?>
 
+<!-- Script pour le dataTable -->
 <script>
     let table = new DataTable('#myTable', {
         scrollY: 400,
