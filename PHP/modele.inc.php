@@ -17,10 +17,10 @@ function getConnexion(): PDO
 function verifyUserlog($username, $password) {
     $connexion = getConnexion();
 
-    $sql = "SELECT * FROM employes WHERE NOM_UTILISATEUR = :username AND MDP_UTILISATEUR = :password";
+    $sql = "SELECT * FROM employes WHERE EMAIL = :username AND MDP_UTILISATEUR = :pass";
     $query = $connexion->prepare($sql);
     $query->bindParam(':username', $username, PDO::PARAM_STR);
-    $query->bindParam(':password', $password, PDO::PARAM_STR);
+    $query->bindParam(':pass', $password, PDO::PARAM_STR);
     $query->execute();
 
     $user = $query->fetch(PDO::FETCH_ASSOC);

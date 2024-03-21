@@ -1,3 +1,5 @@
+DROP DATABASE IF EXISTS bdd;
+
 CREATE DATABASE IF NOT EXISTS bdd
 CHARACTER SET utf8mb4;
 
@@ -7,13 +9,14 @@ CREATE TABLE employes(
    ID_EMPLOYE INT AUTO_INCREMENT,
    NOM_UTILISATEUR VARCHAR(50) NOT NULL,
    PRENOM_UTILISATEUR VARCHAR(50) NOT NULL,
-   MDP_UTILISATEUR VARCHAR(50) NOT NULL,
+   MDP_UTILISATEUR VARCHAR(100) NOT NULL,
    TYPE_UTILISATEUR VARCHAR(50) NOT NULL,
+   EMAIL varchar(255) DEFAULT NULL,
    PRIMARY KEY(ID_EMPLOYE)
 ) ENGINE=InnoDB;
 
 CREATE TABLE clients(
-   ID_CLIENT INT AUTO_INCREMENT, 
+   ID_CLIENT INT AUTO_INCREMENT,
    NOM_CLIENT VARCHAR(50) NOT NULL,
    PRENOM_CLIENT VARCHAR(50) NOT NULL,
    ADRESSE_CLIENT VARCHAR(50) NOT NULL,
@@ -70,8 +73,11 @@ CREATE TABLE ligne_commande(
 CREATE TABLE retour_SAV(
    ID_RETOUR INT AUTO_INCREMENT,
    QTE_RETOUR INT NOT NULL,
+   MOTIF_RETOUR VARCHAR(50) NOT NULL,
+   ID_ARTICLE INT NOT NULL,
    ID_TICKET INT NOT NULL,
    PRIMARY KEY(ID_RETOUR),
+   FOREIGN KEY(ID_ARTICLE) REFERENCES article(ID_ARTICLE),
    FOREIGN KEY(ID_TICKET) REFERENCES tickets(ID_TICKET)
 ) ENGINE=InnoDB;
 
@@ -90,11 +96,18 @@ INSERT INTO `clients`(`NOM_CLIENT`, `PRENOM_CLIENT`, `ADRESSE_CLIENT`, `CP_CLIEN
 VALUES ('Terrieur','Alain','5 rue du coin','26260','Le Nord','0707070707'),
        ('Terrieur','Alex','9 rue du coin','26260','Le Nord','0708090102'),
        ('Neymar','Jean','5 rue du Lac','32120','Le Sud','0607270757');
+COMMIT;
 
 -- Création employes --
 
-INSERT INTO `employes` (ID_EMPLOYE, NOM_UTILISATEUR, MDP_UTILISATEUR, TYPE_UTILISATEUR)
-VALUES (2, 'administrateur', 'admin', 'Administrateur');
+INSERT INTO `employes` (`NOM_UTILISATEUR`, `PRENOM_UTILISATEUR`, `MDP_UTILISATEUR`, `TYPE_UTILISATEUR`, `EMAIL`)
+VALUES ('administrateur', '', 'admin', 'Admin', 'admin@example.com'),
+       ('Luminio', 'Gregory', 'Luminio+1234', 'Admin', 'gregory@example.com'),
+       ('marley', 'bob', 'Marley+1111', 'Hotline', 'bob@example.com'),
+       ('tonton', 'david', 'Tonton!0000', 'SAV', 'david@example.com'),
+       ('papin', 'jean-pierre', 'JeanP+3333', 'Hotline', 'jeanpierre@example.com'),
+       ('Plusdebiere', 'Roger', 'Roger@8585', 'SAV', 'roger@example.com'),
+       ('Dupond', 'jean', 'Jean+0000', 'SAV', 'jean@example.com');
 COMMIT;
 
 -- Création Articles --
@@ -104,13 +117,16 @@ VALUES ('Pergola Aluminium à Toile Enroulable','1720.51','noir','10','75','0','
        ('Pergola Aluminium toit polycarbonate','1611.00','gris','10','150','0','0'),
        ('Portail Coulissant Aluminium peint','2733.98','gris','16','95','0','0'),
        ('Porte Entrée Aluminium','2194.72','noir','10','62','0','0');
+COMMIT;
 
 -- Création commandes --
 
 INSERT INTO `commandes`(`PRIX_COMMANDE`, `STATUT_PAIEMENT`, `STATUT_EXPEDITION`, `DATE_COMMANDE`, `ID_CLIENT`)
 VALUES ('3915.23','OK','En attente','2024-03-13','1'),
        ('6539.70','OK','En cours','2024-03-11','2'),
-       ('8260.21','OK','En attente','2024-03-15','3');
+       ('8260.21','OK','En attente','2024-03-15','3'),
+       ('8260.21','OK','Livrée','2024-03-12','2');
+COMMIT;
 
 -- Création Lignes Commandes --
 
@@ -123,6 +139,13 @@ VALUES ('1','1','1'),
        ('1','4','3'),
        ('1','2','3'),
        ('1','3','3'),
-       ('1','4','2');
+       ('1','4','4'),
+       ('1','1','4'),
+       ('1','2','4'),
+       ('1','3','4');
+COMMIT;
 
--- Trigger Check Total Prix Commande --
+INSERT INTO `tickets`(`DATE_TICKET`, `MOTIF_TICKET`, `ID_EMPLOYE`, `ID_COMMANDE`)
+VALUES ('2024-03-18','Expédition','2','2'),
+       ('2024-03-15','Expédition','2','4');
+COMMIT;
