@@ -22,7 +22,6 @@ div.dataTables_wrapper{
 }
 h1{
     text-align: center;
-
 }
 h3{
     text-align: center;
@@ -30,7 +29,6 @@ h3{
 .alert{
     text-align: center;
 }
-
 #monBoutonOff{
     display: none;
     align-items: center;
@@ -86,13 +84,23 @@ h3{
     width: 50px;
     transition: all 0.2s;
 }
-h3{
-    text-align: center;
+#monBoutonOnResetConf{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 52%;
+    right: 0px;
+    transform: translateY(-50%);
+    width: 50px;
+    opacity: 0.4;
+    transition: all 0.2s;
 }
-.alert{
-    text-align: center;
+#newMDP{
+    position: relative;
 }
-
+#confMdp{
+    position: relative;
+}
 #newMpd{
     position: relative;
 }
