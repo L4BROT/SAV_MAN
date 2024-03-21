@@ -287,19 +287,26 @@
     function addEmploye($mdp,$typ,$nom,$prenom,$mail) {
         //Appel la fonction de controle de saisie des champs
         $cond = controleChamp($mdp,$nom,$prenom);
+        if ($cond == "mdpErrone") {
+            return "mdpErrone";
+        }elseif ($cond == "nomErrone") {
+            return "nomErrone";
+        }elseif ($cond == "prenomErrone") {
+            return "prenomErrone";
+        }
         //Recupere un tableau d'utilisateur
         $tabEmployes = afficheUtilisateur();
         //Parcour le tableaux et verifie si le mot de passe est disponible
         foreach ($tabEmployes as $row) {
             if ($row['EMAIL'] == $mail) {
-                $delet = false;
+                $delet = "mailidentique";
                 return $delet;
             }else {
                 $delet=true;
             }
             
         }
-        if ($delet == true && $cond == true) {
+        if ($delet == true && $cond == "ok") {
             $based = getBdd();
             //var_dump($based);
             $delete = $based->prepare('INSERT INTO employes (NOM_UTILISATEUR, PRENOM_UTILISATEUR,MDP_UTILISATEUR, TYPE_UTILISATEUR,EMAIL) VALUES (:nom,:prenom,:mdp,:typ,:mail)');          
@@ -315,7 +322,7 @@
             $delet = $delete->execute();
             //var_dump($delet);
             
-            return $delet;
+            return "formok";
         }
        
     }
@@ -324,12 +331,17 @@
    
 
     function controleChamp($mdp,$nom,$prenom){
-        if (preg_match('/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[-+!*$@%_])([-+!*$@%_\w]{8,15})$/', $mdp) && preg_match('/^(?:[^\d\W][\-\s\']{0,1}){2,20}$/i', $nom)&&preg_match('/^(?:[^\d\W][\-\s\']{0,1}){2,20}$/i', $prenom)) {
-            return true;
-        }else {
-            return false;
-        }
-    
+        if (preg_match('/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[-+!*$@%_])([-+!*$@%_\w]{8,15})$/', $mdp)) {
+            $ok = "ok";
+        }else return "mdpErrone";
+        if (preg_match('/^(?:[^\d\W][\-\s\']{0,1}){2,20}$/i', $nom)) {
+            $ok = "ok";
+        }else return "nomErrone";
+        if ( preg_match('/^(?:[^\d\W][\-\s\']{0,1}){2,20}$/i', $prenom)) {
+            $ok = "ok";
+        }else return "prenomErrone";
+        
+        return $ok;
     }
 
     //Affiche les utilisateur present dans la bdd
@@ -347,8 +359,7 @@
         
         foreach ($liste as $row) {
             if ($row['EMAIL'] == $mail && $row['ID_EMPLOYE'] != $id) {
-                $delet = false;
-                return $delet;
+                return "mailidentique";
             }
             if ($row['TYPE_UTILISATEUR'] == 'Admin') {
                 $compt++;
@@ -359,10 +370,15 @@
         }
         //Valide les saisie de modification renvoie vrais ou faux
         if ($type == 'Admin' && $typ != 'Admin' && $compt == 1) {
-            $delet = false;
-            return $delet;
+            return "resteAdmin";
         }else {
-            if (preg_match('/^(?:[^\d\W][\-\s\']{0,1}){2,20}$/i', $nom)&&preg_match('/^(?:[^\d\W][\-\s\']{0,1}){2,20}$/i', $prenom))  {
+            if (preg_match('/^(?:[^\d\W][\-\s\']{0,1}){2,20}$/i', $nom)) {
+                $ok = "ok";
+            }else return "nomErrone";
+            if ( preg_match('/^(?:[^\d\W][\-\s\']{0,1}){2,20}$/i', $prenom)) {
+                $ok = "ok";
+            }else return "prenomErrone";
+            if ($ok = "ok")  {
                 //Si vrais envoie de la requete et modification dans la bdd
                 $based = getBdd();
         
@@ -375,57 +391,63 @@
                 $mod->bindParam(':nvMail', $mail, PDO::PARAM_STR);
                 
                 $delet = $mod->execute();
-                return $delet;
+                return "formok";
                 
-            }else {//Sinon renvoie faux pour afficher un message d'erreur
-                $delet = false;
-                return $delet;
             }
         }
         
     }
-  //Permet de supprimer un utilisateur
-  function supprimeEmploye($id,$typ){
-    $liste = afficheUtilisateur();
-    $compt = 0 ;
-    $bdd = getBdd();
-    $listeTicket = $bdd->query('SELECT * from tickets' );
-    $listeTicket->fetchAll(PDO::FETCH_ASSOC);
+    
+    function recupTicket(){
+        $bdd = getBdd();
+        $listeTicket = $bdd->query('SELECT * from tickets' );
+        return $listeTicket->fetchAll(PDO::FETCH_ASSOC);
+    }
 
-    foreach ($listeTicket as $row) {
-        if ($row['ID_EMPLOYE'] == $id) {
-            $delet = false;
-            return $delet;
+    //Permet de supprimer un utilisateur
+    function supprimeEmploye($id,$typ){
+
+        $liste = afficheUtilisateur();
+        $compt = 0 ;
+        $bdd = getBdd();
+        $listeTicket = recupTicket();
+
+        foreach ($liste as $row) {
+            if ($row['TYPE_UTILISATEUR'] == 'Admin') {
+                $compt++;
+            }
+            if ($row['ID_EMPLOYE'] == $id) {
+                $type = $row['TYPE_UTILISATEUR'];
+            }
         }
-    }
-    foreach ($liste as $row) {
-        if ($row['TYPE_UTILISATEUR'] == 'Admin') {
-            $compt++;
+
+        foreach ($listeTicket as $row) {
+            if ($row['ID_EMPLOYE'] == $id) {
+                $val = true;
+                break;
+            }
         }
-        if ($row['ID_EMPLOYE'] == $id) {
-            $type = $row['TYPE_UTILISATEUR'];
-        }
-    }
-    if ($compt == 1 && $type == 'Admin') {
-        $delet = false;
-        return $delet;
-    }else {
-        //Connexion a la bdd et envoie de la requete et suppression de l'employe dans la bdd
-        $based = getBdd();
+
+        if ($val) {
+            return "ticketenCours";
+        }elseif ($compt == 1 && $type == 'Admin') {
+            return 'adminSeul';
+        }else {
+            //Connexion a la bdd et envoie de la requete et suppression de l'employe dans la bdd
+            $based = getBdd();
+            
+            $mod = $based->prepare('DELETE FROM employes WHERE ID_EMPLOYE= :contactId');          
         
-        $mod = $based->prepare('DELETE FROM employes WHERE ID_EMPLOYE= :contactId');          
-    
-        $mod->bindParam(':contactId', $id, PDO::PARAM_INT);
-        try {
-            $delet = $mod->execute();
-        } catch (PDOException $th) {
-            $delet = false;
+            $mod->bindParam(':contactId', $id, PDO::PARAM_INT);
+            try {
+                $delet = $mod->execute();
+                return "formok";
+            } catch (PDOException $th) {
+                $delet = false;
+            }
         }
         
-        return $delet;
     }
-    
-}
 
     function modifierMotDePasse($id,$mdp,$confirmMdp){
         if (preg_match('/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[-+!*$@%_])([-+!*$@%_\w]{8,15})$/', $mdp) && preg_match('/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[-+!*$@%_])([-+!*$@%_\w]{8,15})$/', $confirmMdp)){
