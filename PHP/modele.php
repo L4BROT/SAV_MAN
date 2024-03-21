@@ -47,7 +47,7 @@
     // Donne tous les articles rattachés à une commande avec l'ID commande
     function getArticlesCommande($id){
         $connexion = getBdd();
-        $requete = "select LIBELLE_ART, PRIX_ART, COULEUR_ART, GARANTIE_ART from ligne_commande
+        $requete = "select LIBELLE_ART, PRIX_ART, COULEUR_ART, article.ID_ARTICLE, GARANTIE_ART from ligne_commande
                     inner join article on ligne_commande.ID_ARTICLE = article.ID_ARTICLE
                     where ligne_commande.ID_COMMANDE = :id";
         $reponse = $connexion->prepare($requete);
