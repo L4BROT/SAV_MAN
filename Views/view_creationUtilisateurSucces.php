@@ -6,20 +6,18 @@
       </div>
       <br>
       <br>
-      <div class="text-center">
-        <button type="reset" class="btn btn-success"><a href="index.php?action=afficherUtilisateur" style="text-decoration:none;color: #FFFFFF">Retour a la liste</a></button>
-      </div>
 <?php
     }else {
 ?>
       <div class="alert alert-danger text-center" role="alert">
         Erreur lors de l'ajout<br>
         Veuillez verifier votre saisie<br>
+        Ou le mot de passe existe deja
       </div>
       <br>
       <br>
       <div class="text-center">
-        <button type="reset" class="btn btn-danger" onclick="history.go(-1)">Retour</button>
+        <button type="reset" class="btn btn-danger"><a href="<?php echo $_SERVER['HTTP_REFERER']; ?>" style="text-decoration:none;color: #FFFFFF">Retour formulaire</a></button>
       </div>
 <?php
     }

@@ -284,44 +284,45 @@
     }
  
     // Ajouter un employé 
-    function addEmploye($mdp,$typ,$nom,$prenom,$mail) {
+    function addEmploye($mdp,$typ,$nom,$prenom) {
         //Appel la fonction de controle de saisie des champs
         $cond = controleChamp($mdp,$nom,$prenom);
         //Recupere un tableau d'utilisateur
         $tabEmployes = afficheUtilisateur();
         //Parcour le tableaux et verifie si le mot de passe est disponible
         foreach ($tabEmployes as $row) {
-            if ($row['EMAIL'] == $mail) {
-                $delet = false;
-                return $delet;
+            if ($row['MDP_UTILISATEUR'] == $mdp) {
+                $cond = false ;
+                break;
             }else {
-                $delet=true;
+                $cond;
             }
-            
         }
-        if ($delet == true && $cond == true) {
+        //Si vrais execution de la requete d'ajout de l'utilisateur a la bdd
+        if ($cond) {
+            //echo($mdp.$typ.$nom);
             $based = getBdd();
             //var_dump($based);
-            $delete = $based->prepare('INSERT INTO employes (NOM_UTILISATEUR, PRENOM_UTILISATEUR,MDP_UTILISATEUR, TYPE_UTILISATEUR,EMAIL) VALUES (:nom,:prenom,:mdp,:typ,:mail)');          
+            $delete = $based->prepare('INSERT INTO employes (NOM_UTILISATEUR, PRENOM_UTILISATEUR,MDP_UTILISATEUR, TYPE_UTILISATEUR ) VALUES (:nom,:prenom,:mdp,:typ)');          
             //var_dump($delete);
         
             $delete->bindParam('mdp', $mdp, PDO::PARAM_STR);
             $delete->bindParam('prenom', $prenom, PDO::PARAM_STR);
             $delete->bindParam('typ', $typ, PDO::PARAM_STR);
             $delete->bindParam('nom', $nom, PDO::PARAM_STR);
-            $delete->bindParam('mail', $mail, PDO::PARAM_STR);
             
             
             $delet = $delete->execute();
             //var_dump($delet);
             
             return $delet;
+            
+        }else {//Sinon retourne faux pour afficher un message d'erreur
+            $delet = false;
+            return $delet;
         }
-       
-    }
-
         
-   
+    }
 
     function controleChamp($mdp,$nom,$prenom){
         if (preg_match('/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[-+!*$@%_])([-+!*$@%_\w]{8,15})$/', $mdp) && preg_match('/^(?:[^\d\W][\-\s\']{0,1}){2,20}$/i', $nom)&&preg_match('/^(?:[^\d\W][\-\s\']{0,1}){2,20}$/i', $prenom)) {
@@ -341,75 +342,29 @@
     }
  
     //Permet de modifier les utilisateurs
-    function modifierUtilisateur($nom,$id,$typ,$prenom,$mail){
-        $liste = afficheUtilisateur();
-        $compt = 0 ;
-        
-        foreach ($liste as $row) {
-            if ($row['EMAIL'] == $mail && $row['ID_EMPLOYE'] != $id) {
-                $delet = false;
-                return $delet;
-            }
-            if ($row['TYPE_UTILISATEUR'] == 'Admin') {
-                $compt++;
-            }
-            if ($row['ID_EMPLOYE'] == $id) {
-                $type = $row['TYPE_UTILISATEUR'];
-            }
-        }
+    function modifierUtilisateur($nom,$id,$typ,$prenom){
         //Valide les saisie de modification renvoie vrais ou faux
-        if ($type == 'Admin' && $typ != 'Admin' && $compt == 1) {
+        if (preg_match('/^(?:[^\d\W][\-\s\']{0,1}){2,20}$/i', $nom)&&preg_match('/^(?:[^\d\W][\-\s\']{0,1}){2,20}$/i', $prenom))  {
+            //Si vrais envoie de la requete et modification dans la bdd
+            $based = getBdd();
+    
+            $mod = $based->prepare('UPDATE employes SET NOM_UTILISATEUR= :nvNom, PRENOM_UTILISATEUR= :nvprenom, TYPE_UTILISATEUR= :nvType  WHERE ID_EMPLOYE= :contactId');          
+            
+            $mod->bindParam(':nvType', $typ, PDO::PARAM_STR);
+            $mod->bindParam(':nvNom', $nom, PDO::PARAM_STR);
+            $mod->bindParam(':nvprenom', $prenom, PDO::PARAM_STR);
+            $mod->bindParam(':contactId', $id, PDO::PARAM_INT);
+            
+            $delet = $mod->execute();
+            return $delet;
+            
+        }else {//Sinon renvoie faux pour afficher un message d'erreur
             $delet = false;
             return $delet;
-        }else {
-            if (preg_match('/^(?:[^\d\W][\-\s\']{0,1}){2,20}$/i', $nom)&&preg_match('/^(?:[^\d\W][\-\s\']{0,1}){2,20}$/i', $prenom))  {
-                //Si vrais envoie de la requete et modification dans la bdd
-                $based = getBdd();
-        
-                $mod = $based->prepare('UPDATE employes SET NOM_UTILISATEUR= :nvNom, PRENOM_UTILISATEUR= :nvprenom, TYPE_UTILISATEUR= :nvType, EMAIL= :nvMail WHERE ID_EMPLOYE= :contactId');          
-                
-                $mod->bindParam(':nvType', $typ, PDO::PARAM_STR);
-                $mod->bindParam(':nvNom', $nom, PDO::PARAM_STR);
-                $mod->bindParam(':nvprenom', $prenom, PDO::PARAM_STR);
-                $mod->bindParam(':contactId', $id, PDO::PARAM_INT);
-                $mod->bindParam(':nvMail', $mail, PDO::PARAM_STR);
-                
-                $delet = $mod->execute();
-                return $delet;
-                
-            }else {//Sinon renvoie faux pour afficher un message d'erreur
-                $delet = false;
-                return $delet;
-            }
         }
-        
     }
   //Permet de supprimer un utilisateur
-  function supprimeEmploye($id,$typ){
-    $liste = afficheUtilisateur();
-    $compt = 0 ;
-    $bdd = getBdd();
-    $listeTicket = $bdd->query('SELECT * from tickets' );
-    $listeTicket->fetchAll(PDO::FETCH_ASSOC);
-
-    foreach ($listeTicket as $row) {
-        if ($row['ID_EMPLOYE'] == $id) {
-            $delet = false;
-            return $delet;
-        }
-    }
-    foreach ($liste as $row) {
-        if ($row['TYPE_UTILISATEUR'] == 'Admin') {
-            $compt++;
-        }
-        if ($row['ID_EMPLOYE'] == $id) {
-            $type = $row['TYPE_UTILISATEUR'];
-        }
-    }
-    if ($compt == 1 && $type == 'Admin') {
-        $delet = false;
-        return $delet;
-    }else {
+    function supprimeEmploye($id){
         //Connexion a la bdd et envoie de la requete et suppression de l'employe dans la bdd
         $based = getBdd();
         
@@ -423,22 +378,5 @@
         }
         
         return $delet;
-    }
-    
-}
-
-    function modifierMotDePasse($id,$mdp,$confirmMdp){
-        if (preg_match('/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[-+!*$@%_])([-+!*$@%_\w]{8,15})$/', $mdp) && preg_match('/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[-+!*$@%_])([-+!*$@%_\w]{8,15})$/', $confirmMdp)){
-            if ($mdp != $confirmMdp) {
-                $delet = false;
-            }else {
-                $based = getBdd();
-                $mod = $based->prepare('UPDATE employes SET MDP_UTILISATEUR= :nvMdp WHERE ID_EMPLOYE= :id');
-                $mod->bindParam('nvMdp', $mdp, PDO::PARAM_STR);
-                $mod->bindParam('id', $id, PDO::PARAM_INT);
-                $delet = $mod->execute();
-                return $delet;
-            }
-        }
     }
      
