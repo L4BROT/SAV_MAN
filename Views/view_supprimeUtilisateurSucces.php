@@ -6,6 +6,9 @@
       </div>
       <br>
       <br>
+      <div class="text-center">
+        <button type="reset" class="btn btn-success"><a href="index.php?action=afficherUtilisateur" style="text-decoration:none;color: #FFFFFF">Retour a la liste</a></button>
+      </div>
 <?php
     }else {
 ?>
@@ -15,6 +18,9 @@
       </div>
       <br>
       <br>
+      <div class="text-center">
+        <button type="reset" class="btn btn-danger"><a href="index.php?action=afficherUtilisateur" style="text-decoration:none;color: #FFFFFF">Retour a la liste</a></button>
+      </div>
      
 <?php
     }

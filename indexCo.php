@@ -1,71 +1,64 @@
 <?php
-session_start();
-// Inclure le fichier du modèle
-require_once ("PHP/modele.inc.php");
+session_start(); // Démarrage de la session
 
-if (!isset($_SESSION['TYPE_UTILISATEUR'])) {
-    require_once ("Views/view_connexion.php");
-    
+// Inclusion du fichier du modèle
+require_once("PHP/modele.inc.php");
 
-    // Vérifier si la soumission du formulaire de connexion
-    if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action']) && $_POST['action'] === 'connexion') {
-        // Vérifier si les champs username et password sont définis
-        if (isset ($_POST['username']) && isset ($_POST['password'])) {
-            $username = $_POST['username'];
-            $password = $_POST['password'];
+// Initialisation de la variable d'erreur
+$error = "";
 
-            // Vérifier les informations d'identification
-            try {
-                $user = verifyUserlog($username, $password);
+try {
+    // Tentative de connexion à la base de données
+    $connexion = getConnexion();
+// echo "Connexion à la base de données réussie!";
 
-                if ($user) {
-                    // Stocker les informations de l'utilisateur dans la session
-                    $_SESSION['ID_EMPLOYE'] = $user['ID_EMPLOYE'];
-                    $_SESSION['EMAIL'] = $user['EMAIL'];
-                    $_SESSION['TYPE_UTILISATEUR'] = $user['TYPE_UTILISATEUR'];
-                    //var_dump($_SESSION);
+} catch (Exception $e) {
+    // Affichage erreur de connexion
+    $error = "Erreur lors de la connexion à la base de données: " . $e->getMessage();
+    //var_dump($error);
+}
 
-                    // Redirection vers la page d'accueil
+// Vérification de la soumission du formulaire de connexion
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action']) && $_POST['action'] === 'connexion') {
 
-                    header("location:index.php?action=accueil");
+    // Vérification si les champs username et password sont définis
+    if (isset($_POST['username']) && isset($_POST['password'])) {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
 
-                    exit();
-                } else {
-                    // Nom d'utilisateur ou mot de passe incorrect
-                    $_SESSION['error'] = "Nom d'utilisateur ou mot de passe incorrect.";
-                }
-            } catch (ModeleException $e) {
-                // Gérer les erreurs de modèle
-                $_SESSION['error'] = "Erreur de modèle: " . $e->getMessage();
+        //var_dump($username);
+        //var_dump($password);
+
+        // Vérification des informations d'identification
+        try {
+            $user = verifyUserlog($username, $password);
+
+            //var_dump($user);
+
+            if ($user) {
+
+                // Supprimer la variable d'erreur de la session avant de rediriger vers la page de connexion
+                unset($_SESSION['error']);
+
+                // L'utilisateur est authentifié, redirection vers la page d'accueil
+                header("Location:index.php?action=accueil");
+                exit();
+            } else {
+                // Nom d'utilisateur ou mot de passe incorrect
+                $error = "Nom d'utilisateur ou mot de passe incorrect.";
+                var_dump($error);
+                // Stockage de l'erreur dans la session
+                $_SESSION['error'] = $error;
+
+                // Redirection vers la page de connexion avec le message d'erreur
+                header("Location:Views/view_connexion.php");
+                exit();
             }
-        } else {
-            $_SESSION['error'] = "Veuillez entrer un nom d'utilisateur et un mot de passe.";
+        } catch (ModeleException $e) {
+            // Gestion des erreurs de modèle
+            $error = "Erreur de modèle: " . $e->getMessage();
+            var_dump($error);
         }
-
-        // Redirection vers la page de connexion avec le message d'erreur
-
-        header("location:indexCo.php");
-
-        exit();
-    }
-    else{
-        $_SESSION['error'] = "";
     }
 }
-else{
-    header("location:index.php?action=accueil");
-}
-
-// Vérifier si l'utilisateur demande la déconnexion
-if (isset ($_GET['action']) && $_GET['action'] == 'deconnexion') {
-    // Détruire toutes les variables de session
-    // $_SESSION = array();
-    // Détruire la session
-    unset($_SESSION['ID_EMPLOYE']);
-    unset($_SESSION['EMAIL']);
-    unset($_SESSION['TYPE_UTILISATEUR']);
-    //var_dump($_SESSION);
-    // Rediriger vers la page de connexion
-    header("location:indexCo.php");
-    exit();
-}
+?>
