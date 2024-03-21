@@ -149,3 +149,17 @@ INSERT INTO `tickets`(`DATE_TICKET`, `MOTIF_TICKET`, `ID_EMPLOYE`, `ID_COMMANDE`
 VALUES ('2024-03-18','Expédition','2','2'),
        ('2024-03-15','Expédition','2','4');
 COMMIT;
+
+-- Création retour SAV --
+
+INSERT INTO `retour_sav`(`QTE_RETOUR`, `MOTIF_RETOUR`, `ID_ARTICLE`, `ID_TICKET`)
+VALUES  ('1', 'Probleme moteur', '3', '1'),
+        ('5', 'Vis manquantes', '2', '2');
+COMMIT;
+
+
+-- Création rebus SAV --
+
+INSERT INTO `stock_rebus`(`QTE_ART`, `MOTIF_REBUS`, `ID_RETOUR`)
+VALUES  ('1', 'Moteur cassé', '1');
+COMMIT;

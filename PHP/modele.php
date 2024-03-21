@@ -380,3 +380,72 @@
         return $delet;
     }
      
+       
+    function getListSAV(){
+        if(file_exists("BDD/param.ini")){
+            $tParam = parse_ini_file("BDD/param.ini", true);
+            extract($tParam["BDD"]);
+        }
+
+        $options = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8");
+
+        $dsn = "mysql:host=$host;port=$port;dbname=$bdd";
+        $connexion = new PDO($dsn, $user, $password, $options);
+
+        $requete = "select ID_RETOUR as id, MOTIF_RETOUR as motif from retour_sav";
+        $reponse = $connexion->prepare($requete);
+
+        $reponse->execute();
+
+        $resultats = $reponse->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $resultats;
+    }
+
+    function getDetailSAV($id){
+
+        if(file_exists("BDD/param.ini")){
+            $tParam = parse_ini_file("BDD/param.ini", true);
+            extract($tParam["BDD"]);
+        }
+
+        define("OPTIONS", array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+
+        $dsn = "mysql:host=$host;port=$port;dbname=$bdd";
+        $connexion = new PDO($dsn, $user, $password, OPTIONS);
+
+        $requete = "select * from retour_sav where ID_RETOUR = :id";
+        $reponse = $connexion->prepare($requete);
+
+        $reponse->bindValue(":id", htmlspecialchars($id), PDO::PARAM_STR);
+
+        $reponse->execute();
+
+        $resultat = $reponse->fetch(PDO::FETCH_ASSOC);
+        
+        return $resultat;
+    }  
+
+    function getListRebus(){
+        if(file_exists("BDD/param.ini")){
+            $tParam = parse_ini_file("BDD/param.ini", true);
+            extract($tParam["BDD"]);
+        }
+
+        $options = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8");
+
+        $dsn = "mysql:host=$host;port=$port;dbname=$bdd";
+        $connexion = new PDO($dsn, $user, $password, $options);
+
+        $requete = "select ID_REBUS as id, MOTIF_REBUS as motif, QTE_ART as qte from stock_rebus";
+        $reponse = $connexion->prepare($requete);
+
+        $reponse->execute();
+
+        $resultats = $reponse->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $resultats;
+    }
