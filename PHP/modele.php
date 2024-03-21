@@ -298,6 +298,32 @@
         $reponse->execute();
     }
 
+    function getListSAV(){
+        $connexion = getBdd();
+
+        $requete = "select * from article where QTE_SAV > 0";
+        $reponse = $connexion->prepare($requete);
+
+        $reponse->execute();
+
+        $resultats = $reponse->fetchAll(PDO::FETCH_ASSOC);
+
+        return $resultats;
+    }
+
+    function getListRebus(){
+        $connexion = getBdd();
+
+        $requete = "select * from article where QTE_REBUS > 0";
+        $reponse = $connexion->prepare($requete);
+
+        $reponse->execute();
+
+        $resultats = $reponse->fetchAll(PDO::FETCH_ASSOC);
+
+        return $resultats;
+    }
+
     //Creation de l'objet pdo connexion a la bdd
     function getBdd() {
         //Recuperation des parametre de connexion

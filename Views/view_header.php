@@ -33,7 +33,7 @@
                 <div class="navbar-nav">
                     <a class="nav-link mx-2" style="color: white;" aria-current="page"
                         href="index.php?action=accueil">Accueil</a>
-                    <a class="nav-link mx-2" style="color: white;" href="#">SAV</a>
+                    <a class="nav-link mx-2" style="color: white;" href="index.php?action=sav">SAV</a>
                     <a class="nav-link mx-2" style="color: white;" href="#">Dossiers
                         finalisés</a>
                     <a class="nav-link mx-2" style="color: white;" href="index.php?action=expedition">Expéditions</a>

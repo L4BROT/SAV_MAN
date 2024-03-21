@@ -67,6 +67,43 @@ if (isset($_GET["action"]) && $_GET["action"] == "accueil") {
     }
 }
 
+if (isset($_GET["action"]) && $_GET["action"] == "sav") {
+    $titre = "accueil";
+
+    // Affichage dynamique de la navbar suivant le niveau d'autorisation
+    if ($_SESSION['TYPE_UTILISATEUR'] == 'Admin'){
+        require_once("Views/view_header_admin.php");
+    }
+    else if($_SESSION['TYPE_UTILISATEUR'] == 'SAV'){
+        require_once("Views/view_header.php");
+    } 
+    else {
+        require_once("Views/view_header_hotline.php");
+    }
+
+    // Affichage sous-menu de la page accueil (Commandes, Articles)
+    require_once("Views/view_menu_sav.php");
+
+    // Affichage des scénarios page accueil
+    if (isset($_POST["action"])) {
+        switch ($_POST["action"]) {
+            case "liste_SAV":
+                $liste_SAV = getListSAV();
+                require_once("Views/view_sav.php");
+                break;
+
+            case "liste_rebus":
+                $liste_rebus = getListRebus();
+                require_once("Views/view_sav.php");
+                break;
+        }
+    }
+    else{
+        $liste_SAV = getListSAV();
+        require_once("Views/view_sav.php");
+    }
+}
+
 // Affichage onglet Expédition
 if (isset($_GET["action"]) && $_GET["action"] == "expedition") {
     $titre = "Expéditions";
@@ -205,11 +242,11 @@ if (isset($_POST['key'])) {
         $titre = "Creer un utilisateur";
         require_once("Views/view_header_admin.php");
         
-        $nom = $_POST['Nom'];
+        $nom = trim($_POST['Nom']);
         $mdp = $_POST['mdp'];
-        $typ = $_POST['btnType'];
-        $prenom = $_POST['Prenom'];
-        $mail = $_POST['Mail'];
+        $typ = trim($_POST['btnType']);
+        $prenom = trim($_POST['Prenom']);
+        $mail = trim($_POST['Mail']);
         
         try {
             
@@ -225,11 +262,11 @@ if (isset($_POST['key'])) {
         $titre = "Modification de l'utilisateur";
         require_once("Views/view_header_admin.php");
         
-        $nom = $_POST['Nom'];
-        $typ = $_POST['Type'];
-        $id = $_POST['id'];
-        $prenom = $_POST['Prenom'];
-        $mail = $_POST['Mail'];
+        $nom = trim($_POST['Nom']);
+        $typ = trim($_POST['Type']);
+        $id = trim($_POST['id']);
+        $prenom = trim($_POST['Prenom']);
+        $mail = trim($_POST['Mail']);
         
         try {
            

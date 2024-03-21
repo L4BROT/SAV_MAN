@@ -115,10 +115,10 @@ COMMIT;
 -- Création Articles --
 
 INSERT INTO `article`(`LIBELLE_ART`, `PRIX_ART`, `COULEUR_ART`, `GARANTIE_ART`, `QTE_STOCK`, `QTE_SAV`, `QTE_REBUS`)
-VALUES ('Pergola Aluminium à Toile Enroulable','1720.51','noir','10','75','0','0'),
-       ('Pergola Aluminium toit polycarbonate','1611.00','gris','10','150','0','0'),
-       ('Portail Coulissant Aluminium peint','2733.98','gris','16','95','0','0'),
-       ('Porte Entrée Aluminium','2194.72','noir','10','62','0','0');
+VALUES ('Pergola Aluminium à Toile Enroulable','1720.51','noir','10','75','9','8'),
+       ('Pergola Aluminium toit polycarbonate','1611.00','gris','10','150','0','2'),
+       ('Portail Coulissant Aluminium peint','2733.98','gris','16','95','4','0'),
+       ('Porte Entrée Aluminium','2194.72','noir','10','62','3','1');
 COMMIT;
 
 -- Création commandes --
