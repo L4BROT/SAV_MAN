@@ -1,19 +1,16 @@
 <?php
-    if ($liste) {
+    if ($newMdp) {
 ?>
       <div class="alert alert-success text-center" role="alert">
-        Employes modifier avec succés
+        Le mot de passe a etait reinitialisé avec succés
       </div>
       <br>
       <br>
-      <div class="text-center">
-        <button type="reset" class="btn btn-success"><a href="index.php?action=afficherUtilisateur" style="text-decoration:none;color: #FFFFFF">Retour a la liste</a></button>
-      </div>
 <?php
     }else {
 ?>
       <div class="alert alert-danger text-center" role="alert">
-        Erreur lors de la modification<br>
+        Erreur lors de la reinitiallisation<br>
         Veuillez verifier votre saisie
       </div>
       <br>

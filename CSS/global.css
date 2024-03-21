@@ -18,23 +18,85 @@ div.dataTables_wrapper{
     transform: translate(-50%, -50%);
     -webkit-transform: translate(-50%, -50%);
     text-align: center;
-    margin-top: 20px;
 }
 h1{
     text-align: center;
-}
-h3{
-    text-align: center;
-}
+} 
 .alert{
     text-align: center;
 }
-
-@font-face{
-    font-family: 'calibri';
-    src: url('FONTS/calibri-regular.ttf');
+#monBoutonOff{
+    display: none;
+    align-items: center;
+    position: absolute;
+    top: 44.7%;
+    right: 0px;
+    opacity: 0.4;
+    transform: translateY(-50%);
+    width: 50px;
+    transition: all 0.2s;
 }
-
-body{
-    font-family: 'calibri', sans-serif;
+#monBoutonOn{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 44.7%;
+    right: 0px;
+    transform: translateY(-50%);
+    width: 50px;
+    opacity: 0.4;
+    transition: all 0.2s;
+}
+#monBoutonOffReset{
+    display: none;
+    align-items: center;
+    position: absolute;
+    top: 32%;
+    right: 0px;
+    opacity: 0.4;
+    transform: translateY(-50%);
+    width: 50px;
+    transition: all 0.2s;
+}
+#monBoutonOnReset{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 32%;
+    right: 0px;
+    transform: translateY(-50%);
+    width: 50px;
+    opacity: 0.4;
+    transition: all 0.2s;
+}
+#monBoutonOffResetConf{
+    display: none;
+    align-items: center;
+    position: absolute;
+    top: 52%;
+    right: 0px;
+    opacity: 0.4;
+    transform: translateY(-50%);
+    width: 50px;
+    transition: all 0.2s;
+}
+#monBoutonOnResetConf{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 52%;
+    right: 0px;
+    transform: translateY(-50%);
+    width: 50px;
+    opacity: 0.4;
+    transition: all 0.2s;
+}
+#newMDP{
+    position: relative;
+}
+#confMdp{
+    position: relative;
+}
+#newMpd{
+    position: relative;
 }

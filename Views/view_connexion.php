@@ -1,4 +1,8 @@
 <?php
+session_start(); // Démarrage de la session
+
+// Inclusion du fichier du modèle
+require_once("PHP/modele.inc.php");
 
 // Initialisation de la variable d'erreur
 $error = isset($_SESSION['error']) ? $_SESSION['error'] : "";
@@ -23,7 +27,7 @@ $error = isset($_SESSION['error']) ? $_SESSION['error'] : "";
                 <div class="card" style="background-color: #3b4f9f;">
                     <div class="card-header text-center text-white">Login</div>
                     <div class="card-body ">
-                        <form action="indexCo.php" method="post">
+                        <form action="../indexCo.php" method="post">
                             <input type="hidden" name="action" value="connexion">
                             <div class="form-group text-center text-white mb-3">
                                 <label for="username">Username</label>

@@ -13,9 +13,27 @@
         <input type="text" class="form-control" id="idNom" name="Nom" required>
         <label for="idPrenom" class="form-label">Prenom</label>
         <input type="text" class="form-control" id="idPrenom" name="Prenom" required>
+        <label for="idMail" class="form-label">Mail</label>
+        <input type="email" class="form-control" id="idMail" pattern="[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+.[a-zA-Z.]{2,15}" name="Mail" required>
 
+
+        
+      
         <label for="idMdp" class="form-label">Mot de passe</label>
-        <input type="password" class="form-control" id="idMdp" name="mdp" required>
+        <p>
+        <input type="password" class="form-control" id="newMDP" name="mdp" autocomplete="off" required>
+
+        <button type="button" class="btn btn-secondary" id="monBoutonOn">
+            <span class="material-symbols-outlined">
+                visibility
+            </span>
+        </button>
+        <button type="button" class="btn btn-secondary"  id="monBoutonOff">
+            <span class="material-symbols-outlined">
+                visibility_off
+            </span>
+        </button>
+       
         <div id="nomHelp" class="form-text">- minimum de 8 caractères.<br>- au moins une lettre majuscule.<br>- au moins une lettre minuscule.<br>- au moins un chiffre<br>- au moins un de ces caractères spéciaux: $ @ % * + - _ !</div><br>
         
         <fieldset>
