@@ -12,11 +12,7 @@ div.dataTables_wrapper{
 #formUtilisateur{
     width: 50%;
     height: auto;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    -webkit-transform: translate(-50%, -50%);
+    margin: auto;
     text-align: center;
     margin-top: 20px;
 }
