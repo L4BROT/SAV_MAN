@@ -181,6 +181,16 @@ if (isset($_GET["action"]) && $_GET["action"] == "ticket") {
                 $creaOK = true;
                 require_once("Views/view_tickets.php");
                 break;
+
+            case "validerCrea2":
+                $id = $_SESSION["id_commande"];
+                $id_employe = $_SESSION["id_employe"];
+                $id_article = $_SESSION["id_article"];
+                $motif_ticket = $_POST["motif_ticket"];
+                creaTicket2($id, $id_employe, $motif_ticket, $id_article);
+                $creaOK = true;
+                require_once("Views/view_tickets.php");
+                break;
         }
     }
     else{

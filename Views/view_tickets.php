@@ -103,6 +103,7 @@ if (isset($allTickets)) {
                 <th>Motif</th>
                 <th>Employé</th>
                 <th>Commande</th>
+                <th>Article</th>
             </tr>
         </thead>
         <tbody>
@@ -122,6 +123,13 @@ if (isset($allTickets)) {
                     </td>
                     <td>
                         <?php echo $ticket["ID_COMMANDE"]; ?>
+                    </td>
+                    <td>
+                        <?php
+                            if($ticket["ID_ARTICLE"] != NULL){
+                                echo articleNameFromID($ticket["ID_ARTICLE"]);
+                            } 
+                        ?>
                     </td>
                 </tr>
                 <?php
@@ -150,12 +158,27 @@ if (isset($creaTicket)) {
                                 echo $nom["NOM_UTILISATEUR"] . " " . $nom["PRENOM_UTILISATEUR"];
                             ?>
                         </p>
+
+                        <?php
+                            if(isset($_POST["id_article"])){
+                                echo "Article : " . articleNameFromID($_POST["id_article"]) . "<br><br>";
+                                $_SESSION["id_article"] = $_POST["id_article"];
+                            }
+                        ?>
+
                         <form action="index.php?action=ticket" method="post">
                             <div class="form-group">
                                 <label for="motif_ticket">Motif du ticket :</label>
                                 <input type="text" class="form-control" id="motif_ticket" name="motif_ticket" required>
                             </div>
-                            <input type="hidden" name="action" value="validerCrea" />
+                            <?php 
+                                if(isset($_POST["id_article"])){
+                                    echo '<input type="hidden" name="action" value="validerCrea2" />';
+                                }
+                                else{
+                                    echo '<input type="hidden" name="action" value="validerCrea" />';
+                                }
+                            ?>
                             <button type="submit" class="btn btn-primary btn-block mt-2">Créer le ticket</button>
                             <button type="reset" class="btn btn-danger btn-block mt-2"><a href="<?php echo $_SERVER['HTTP_REFERER']; ?>" style="text-decoration:none;color: #FFFFFF">Retour</a></button>
                         </form>

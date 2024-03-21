@@ -97,6 +97,7 @@ if (isset($articles)) {
                 <th>Prix</th>
                 <th>Couleur</th>
                 <th>Garantie</th>
+                <th>Editer tickets</th>
             </tr>
         </thead>
         <tbody>
@@ -116,6 +117,15 @@ if (isset($articles)) {
                     <td>
                         <?php echo $article["GARANTIE_ART"] . " ans."; ?>
                     </td>
+                    <td>
+                        <form action="index.php?action=ticket" method="post" class="mr-1">
+                            <input type="hidden" name="action" value="crea_ticket">
+                            <input type="hidden" name="id_commande" value="<?php echo $id; ?>">
+                            <input type="hidden" name="id_employe" value="<?php echo $_SESSION["ID_EMPLOYE"]; ?>">
+                            <input type="hidden" name="id_article" value="<?php echo $article["ID_ARTICLE"]; ?>">
+                            <input type="submit" value="Ticket article" class="btn btn-primary">
+                        </form>
+                    </td>
                 </tr>
                 <?php
             }
@@ -133,7 +143,7 @@ if (isset($articles)) {
             <input type="hidden" name="action" value="crea_ticket">
             <input type="hidden" name="id_commande" value="<?php echo $id; ?>">
             <input type="hidden" name="id_employe" value="<?php echo $_SESSION["ID_EMPLOYE"]; ?>">
-            <input type="submit" value="Créer un ticket" class="btn btn-primary">
+            <input type="submit" value="Editer ticket" class="btn btn-primary">
         </form>
         <form action="<?php echo $_SERVER['HTTP_REFERER']; ?>" method="post">
             <button type="submit" class="btn btn-danger">Retour</button>
