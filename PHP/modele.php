@@ -436,6 +436,7 @@
     //Permet de supprimer un utilisateur
     function supprimeEmploye($id,$typ){
 
+        $val = false;
         $liste = afficheUtilisateur();
         $compt = 0 ;
         $bdd = getBdd();

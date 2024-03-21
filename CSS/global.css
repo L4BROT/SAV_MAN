@@ -109,3 +109,7 @@ h3{
 body{
     font-family: 'calibri', sans-serif;
 }
+
+.alert{
+    margin-top: 20px;
+}
