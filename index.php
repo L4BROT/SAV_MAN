@@ -205,11 +205,11 @@ if (isset($_POST['key'])) {
         $titre = "Creer un utilisateur";
         require_once("Views/view_header_admin.php");
         
-        $nom = $_POST['Nom'];
+        $nom = trim($_POST['Nom']);
         $mdp = $_POST['mdp'];
-        $typ = $_POST['btnType'];
-        $prenom = $_POST['Prenom'];
-        $mail = $_POST['Mail'];
+        $typ = trim($_POST['btnType']);
+        $prenom = trim($_POST['Prenom']);
+        $mail = trim($_POST['Mail']);
         
         try {
             
@@ -225,11 +225,11 @@ if (isset($_POST['key'])) {
         $titre = "Modification de l'utilisateur";
         require_once("Views/view_header_admin.php");
         
-        $nom = $_POST['Nom'];
-        $typ = $_POST['Type'];
-        $id = $_POST['id'];
-        $prenom = $_POST['Prenom'];
-        $mail = $_POST['Mail'];
+        $nom = trim($_POST['Nom']);
+        $typ = trim($_POST['Type']);
+        $id = trim($_POST['id']);
+        $prenom = trim($_POST['Prenom']);
+        $mail = trim($_POST['Mail']);
         
         try {
            
