@@ -1,0 +1,9 @@
+#btnVoirTickets{
+    display: inline-flex;
+    margin-left: 10%;
+    margin-top: 20px;
+}
+
+#btnVoirTickets form{
+    margin-right: 20px;
+}

@@ -16,7 +16,9 @@
     <script src="https://cdn.datatables.net/plug-ins/1.13.7/filtering/type-based/accent-neutralise.js"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
     <script src="JS/alert_deco.js"></script>
-    <title><?php echo $titre ?></title>
+    <title>
+        <?php echo $titre ?>
+    </title>
 </head>
 
 <body>
@@ -33,10 +35,6 @@
                 <div class="navbar-nav">
                     <a class="nav-link mx-2" style="color: white;" aria-current="page"
                         href="index.php?action=accueil">Accueil</a>
-                    <a class="nav-link mx-2" style="color: white;" href="index.php?action=sav">SAV</a>
-                    <a class="nav-link mx-2" style="color: white;" href="index.php?action=dossiers_finis">Dossiers
-                        finalisés</a>
-                    <a class="nav-link mx-2" style="color: white;" href="index.php?action=expedition">Expéditions</a>
                     <a class="nav-link mx-2" style="color: white;" href="index.php?action=ticket">Tickets</a>
                     <a class="nav-link mx-2" style="color: red;" href="#" onclick="confirmLogout()">Déconnexion</a>
                 </div>

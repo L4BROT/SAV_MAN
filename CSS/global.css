@@ -18,10 +18,14 @@ div.dataTables_wrapper{
     transform: translate(-50%, -50%);
     -webkit-transform: translate(-50%, -50%);
     text-align: center;
+    margin-top: 20px;
 }
 h1{
     text-align: center;
-} 
+}
+h3{
+    text-align: center;
+}
 .alert{
     text-align: center;
 }
@@ -99,4 +103,13 @@ h1{
 }
 #newMpd{
     position: relative;
+}
+
+@font-face{
+    font-family: 'calibri';
+    src: url('FONTS/calibri-regular.ttf');
+}
+
+body{
+    font-family: 'calibri', sans-serif;
 }
