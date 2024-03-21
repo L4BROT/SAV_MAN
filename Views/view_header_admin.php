@@ -6,6 +6,9 @@
     <link rel="stylesheet" href="CSS/global.css">
     <link rel="stylesheet" href="CSS/accueil.css">
     <link rel="stylesheet" href="CSS/tickets.css" />
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
     <script src="https://code.jquery.com/jquery-3.7.1.js"integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="crossorigin="anonymous"></script>
@@ -30,8 +33,23 @@
                 <a class="nav-link mx-2" style="color: white;" href="index.php?action=dossiers_finis">Dossiers finalisés</a>
                 <a class="nav-link mx-2" style="color: white;" href="index.php?action=expedition">Expéditions</a>
                 <a class="nav-link mx-2" style="color: white;" href="index.php?action=ticket">Tickets</a>
+
+                <div class="dropdown">
+                    <a class="btn btn-outline-light dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="material-symbols-outlined">
+                            shield_person
+                        </span>
+                    </a>
+
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <li><a class="dropdown-item" href="index.php?action=afficherUtilisateur">Afficher les utilisateurs</a></li>
+                        <li><a class="dropdown-item"  href="index.php?action=creerUtilisateur">Creer un utilisateur</a></li>
+                    </ul>
+                </div>
+
                 <a class="nav-link mx-2" style="color: white;" href="index.php?action=creerUtilisateur">Créer un utilisateur</a>
                 <a class="nav-link mx-2" style="color: white;" href="index.php?action=afficherUtilisateur">Afficher les utilisateurs</a>
+
                 <a class="nav-link mx-2" style="color: red;" href="#" onclick="confirmLogout()">Déconnexion</a>
             </div>
         </div>

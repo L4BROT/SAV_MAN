@@ -22,12 +22,79 @@ div.dataTables_wrapper{
 }
 h1{
     text-align: center;
+
 }
 h3{
     text-align: center;
 }
 .alert{
     text-align: center;
+}
+
+#monBoutonOff{
+    display: none;
+    align-items: center;
+    position: absolute;
+    top: 44.7%;
+    right: 0px;
+    opacity: 0.4;
+    transform: translateY(-50%);
+    width: 50px;
+    transition: all 0.2s;
+}
+#monBoutonOn{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 44.7%;
+    right: 0px;
+    transform: translateY(-50%);
+    width: 50px;
+    opacity: 0.4;
+    transition: all 0.2s;
+}
+#monBoutonOffReset{
+    display: none;
+    align-items: center;
+    position: absolute;
+    top: 32%;
+    right: 0px;
+    opacity: 0.4;
+    transform: translateY(-50%);
+    width: 50px;
+    transition: all 0.2s;
+}
+#monBoutonOnReset{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 32%;
+    right: 0px;
+    transform: translateY(-50%);
+    width: 50px;
+    opacity: 0.4;
+    transition: all 0.2s;
+}
+#monBoutonOffResetConf{
+    display: none;
+    align-items: center;
+    position: absolute;
+    top: 52%;
+    right: 0px;
+    opacity: 0.4;
+    transform: translateY(-50%);
+    width: 50px;
+    transition: all 0.2s;
+}
+h3{
+    text-align: center;
+}
+.alert{
+    text-align: center;
+}
+
+#newMpd{
+    position: relative;
 }
 
 @font-face{
