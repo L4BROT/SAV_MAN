@@ -50,7 +50,6 @@ if (isset($_GET["action"]) && $_GET["action"] == "accueil") {
                 $tickets_spec = getTicketsSpec($id);
                 require_once("Views/view_tickets.php");
                 break;
-
         }
     } else {
         if ($_SESSION['TYPE_UTILISATEUR'] == 'Admin') {
@@ -71,7 +70,7 @@ if (isset($_GET["action"]) && $_GET["action"] == "accueil") {
 // Affichage onglet Expédition
 if (isset($_GET["action"]) && $_GET["action"] == "expedition") {
     $titre = "Expéditions";
-  
+
     // Affichage dynamique de la navbar suivant le niveau d'autorisation
     if ($_SESSION['TYPE_UTILISATEUR'] == 'Admin') {
         require_once("Views/view_header_admin.php");
@@ -193,26 +192,18 @@ if (isset($_GET["action"]) && $_GET["action"] == "ticket") {
 if (isset($_POST['key'])) {
     $action = $_POST['key'];
     if ($action == 'creation') {
-
         $titre = "Creer un utilisateur";
         require_once("Views/view_header_admin.php");
-
+        
         $nom = $_POST['Nom'];
         $mdp = $_POST['mdp'];
         $typ = $_POST['btnType'];
         $prenom = $_POST['Prenom'];
-
         $mail = $_POST['Mail'];
         
         try {
             
             $add = addEmploye($mdp,$typ,$nom,$prenom,$mail);
-
-
-        try {
-
-            $add = addEmploye($mdp, $typ, $nom, $prenom);
-
             //print_r($add);
             require('Views/view_creationUtilisateurSucces.php');
         } catch (Exception $th) {
@@ -223,52 +214,38 @@ if (isset($_POST['key'])) {
     if ($action == 'modif') {
         $titre = "Modification de l'utilisateur";
         require_once("Views/view_header_admin.php");
-
+        
         $nom = $_POST['Nom'];
         $typ = $_POST['Type'];
         $id = $_POST['id'];
         $prenom = $_POST['Prenom'];
-
         $mail = $_POST['Mail'];
         
         try {
            
             $liste = modifierUtilisateur($nom,$id,$typ,$prenom,$mail);
-
-
-        try {
-            $liste = modifierUtilisateur($nom, $id, $typ, $prenom);
-
             require_once("Views/view_modifeUtilisateurSucces.php");
         } catch (Exception $th) {
             die("Probleme lors de la modification");
         }
-
+        
         require_once("Views/view_footer.php");
     }
     if ($action == 'supprime') {
         $titre = "Supprimer l'utilisateur";
         require_once("Views/view_header_admin.php");
         $id = $_POST['id'];
-
         $typ =$_POST['type'];
 
         try {
             
             $sup = supprimeEmploye($id,$typ);
-
-
-        try {
-
-            $sup = supprimeEmploye($id);
-
             //print_r($add);
             require('Views/view_supprimeUtilisateurSucces.php');
         } catch (Exception $th) {
             die("Probleme lors de la suppression");
         }
         require_once("Views/view_footer.php");
-
     }if ($action == 'modifMdp') {
         $titre = "Modification du mot de passe";
         require_once("Views/view_header_admin.php");
@@ -312,48 +289,14 @@ if (isset($_POST['key'])) {
     
         $titre = "Modifier l'utilisateurs";
         require_once("Views/view_header_admin.php");
-
-    }
-} elseif (isset($_GET['action'])) {
-    $action = $_GET['action'];
-    if ($action == 'creerUtilisateur') {
-        $titre = "Créer un utilisateur";
-        require_once("Views/view_header_admin.php");
-        require_once("Views/view_creerUtilisateur.php");
-        require_once("Views/view_footer.php");
-    }
-    if ($action == 'afficherUtilisateur') {
-
-        $titre = "Afficher les utilisateurs";
-        require_once("Views/view_header_admin.php");
-        try {
-            $liste = afficheUtilisateur();
-            require_once("Views/view_afficheUtilisateur.php");
-        } catch (Exception $th) {
-            die("Probleme lors de l'affichage");
-        }
-
-        require_once("Views/view_footer.php");
-    }
-    if ($action == 'modif') {
-
-        $titre = "Modifier l'utilisateurs";
-        require_once("Views/view_header_admin.php");
-
         $nom = $_GET['Nom'];
         $id = $_GET['id'];
         $typ = $_GET['Type'];
         $prenom = $_GET['Prenom'];
-
         $mail = $_GET['Mail'];
         
         require_once("Views/view_modifUtilisateur.php");
         
-
-
-        require_once("Views/view_modifUtilisateur.php");
-
-
         require_once("Views/view_footer.php");
     }if ($action == 'supprime') {
     
@@ -380,24 +323,7 @@ if (isset($_POST['key'])) {
         require_once("Views/view_reset_mdp.php");
         
     }
-
 }else {
-
-    if ($action == 'supprime') {
-
-        $titre = "Supprimer l'utilisateurs";
-        require_once("Views/view_header_admin.php");
-        $nom = $_GET['Nom'];
-        $id = $_GET['id'];
-        $typ = $_GET['Type'];
-        $prenom = $_GET['Prenom'];
-
-        require_once("Views/view_suppUtilisateur.php");
-
-        require_once("Views/view_footer.php");
-    }
-} else {
-
     $titre = "Accueil";
     require_once("Views/view_header_admin.php");
     require_once("Views/view_menu_accueil.php");
@@ -408,13 +334,10 @@ if (isset($_POST['key'])) {
 
 <!-- Script pour le dataTable -->
 <script>
-
      var saisie2=document.getElementById( 'newMdp' );
     var saisie =document.getElementById( 'confMpd' );
 
     var url = document.location.href;
-
-
     let table = new DataTable('#myTable', {
         scrollY: 400,
         // scrollX: 500,
@@ -449,7 +372,7 @@ if (isset($_POST['key'])) {
         responsive: true,
         select: true
     });
-
+    ///////////////////////////////////////////////////////
     if (url.includes('resetMdp')) {
 
         var onReset =document.getElementById( 'monBoutonOnReset' );
@@ -518,7 +441,6 @@ if (isset($_POST['key'])) {
             }
         });
     }
-
 </script>
 
 <?php
