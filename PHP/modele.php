@@ -269,6 +269,35 @@
         $reponse->execute();
     }
 
+    function articleNameFromID($id){
+        $connexion = getBdd();
+        $requete = "select LIBELLE_ART from article where ID_ARTICLE = :id";
+        $reponse = $connexion->prepare($requete);
+
+        $reponse->bindValue(":id", htmlspecialchars($id), PDO::PARAM_STR);
+
+        $reponse->execute();
+
+        $resultats = $reponse->fetch(PDO::FETCH_ASSOC);
+        
+        return $resultats["LIBELLE_ART"];
+    }
+
+    function creaTicket2($id, $employe, $motif, $article){
+        $connexion = getBdd();
+        $requete = "insert into tickets (`DATE_TICKET`, `MOTIF_TICKET`, `ID_EMPLOYE`, `ID_COMMANDE`, `ID_ARTICLE`)
+                    values (DATE(NOW()), :motif, :employe, :id, :article)";
+
+        $reponse = $connexion->prepare($requete);
+
+        $reponse->bindValue(":id", htmlspecialchars($id), PDO::PARAM_STR);
+        $reponse->bindValue(":employe", htmlspecialchars($employe), PDO::PARAM_STR);
+        $reponse->bindValue(":motif", htmlspecialchars($motif), PDO::PARAM_STR);
+        $reponse->bindValue(":article", htmlspecialchars($article), PDO::PARAM_STR);
+
+        $reponse->execute();
+    }
+
     //Creation de l'objet pdo connexion a la bdd
     function getBdd() {
         //Recuperation des parametre de connexion
