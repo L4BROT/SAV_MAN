@@ -68,7 +68,7 @@ if (isset($_GET["action"]) && $_GET["action"] == "accueil") {
 }
 
 if (isset($_GET["action"]) && $_GET["action"] == "sav") {
-    $titre = "accueil";
+    $titre = "sav";
 
     // Affichage dynamique de la navbar suivant le niveau d'autorisation
     if ($_SESSION['TYPE_UTILISATEUR'] == 'Admin'){
@@ -81,10 +81,10 @@ if (isset($_GET["action"]) && $_GET["action"] == "sav") {
         require_once("Views/view_header_hotline.php");
     }
 
-    // Affichage sous-menu de la page accueil (Commandes, Articles)
+    // Affichage sous-menu de la page sav
     require_once("Views/view_menu_sav.php");
 
-    // Affichage des scénarios page accueil
+    // Affichage des scénarios page sav
     if (isset($_POST["action"])) {
         switch ($_POST["action"]) {
             case "liste_SAV":

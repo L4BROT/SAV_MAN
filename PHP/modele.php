@@ -255,6 +255,7 @@
         return $resultat;
     }
 
+    // Effectue la création d'un ticket pour une commande
     function creaTicket($id, $employe, $motif){
         $connexion = getBdd();
         $requete = "insert into tickets (`DATE_TICKET`, `MOTIF_TICKET`, `ID_EMPLOYE`, `ID_COMMANDE`)
@@ -269,6 +270,7 @@
         $reponse->execute();
     }
 
+    // Donne le nom d'un article (son libellé) depuis son ID 
     function articleNameFromID($id){
         $connexion = getBdd();
         $requete = "select LIBELLE_ART from article where ID_ARTICLE = :id";
@@ -283,6 +285,7 @@
         return $resultats["LIBELLE_ART"];
     }
 
+    // Effectue la création d'un ticket pour un article d'une commande
     function creaTicket2($id, $employe, $motif, $article){
         $connexion = getBdd();
         $requete = "insert into tickets (`DATE_TICKET`, `MOTIF_TICKET`, `ID_EMPLOYE`, `ID_COMMANDE`, `ID_ARTICLE`)
@@ -298,6 +301,7 @@
         $reponse->execute();
     }
 
+    // A voir si on garde #########################################################
     function getListSAV(){
         $connexion = getBdd();
 
@@ -323,6 +327,8 @@
 
         return $resultats;
     }
+
+    // A voir si on garde #########################################################
 
     //Creation de l'objet pdo connexion a la bdd
     function getBdd() {
