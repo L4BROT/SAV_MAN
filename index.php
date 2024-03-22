@@ -299,6 +299,47 @@ if (isset($_POST['key'])) {
 
 ?>
 
+<?php
+if (isset($_GET["action"]) && $_GET["action"] == "sav") {
+    $titre = "SAV";
+
+    if ($_SESSION['TYPE_UTILISATEUR'] == 'Admin') {
+        require_once("Views/view_header_admin.php");
+    }
+    else if($_SESSION['TYPE_UTILISATEUR'] == 'SAV'){
+        require_once("Views/view_header.php");
+    } 
+    else {
+        require_once("Views/view_header_hotline.php");
+    }
+
+    require_once("Views/view_menu_SAV.php");
+    if (isset($_POST["action"])) {
+        switch ($_POST["action"]) {
+            case "liste_SAV":
+                $titre = "Liste SAV";
+                $retour_sav = getListSAV();
+                require("Views/view_liste_SAV.php");
+                break;
+    
+            case "detail_SAV":
+                $titre = "Detail du retour";
+                $id = $_POST["id_retour"];
+                $detail_retour = getDetailSAV($id);
+                require("Views/view_liste_SAV.php");
+                break;
+
+            case "liste_rebus":
+                $titre = "Liste rebus";
+                $stock_rebus = getListRebus();
+                require("Views/view_liste_SAV.php");
+                break;
+        }
+    }
+}
+?>
+
+
 <!-- Script pour le dataTable -->
 <script>
     let table = new DataTable('#myTable', {
