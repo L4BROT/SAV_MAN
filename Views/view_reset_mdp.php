@@ -1,6 +1,6 @@
 <form action="index.php" method="POST" id="formUtilisateur">
     <div class="alert alert-warning" role="alert">
-          Vous etes sur le point de reinitialiser le mot de passe pour <?php echo $nom.", ".$prenom." avec l'Id n° ".$id." embauché comme ".$typ  ?>
+          Vous êtes sur le point de réinitialiser le mot de passe pour <?php echo $nom.", ".$prenom." avec l'Id n° ".$id." embauché comme ".$typ  ?>
     </div>
     <br>
 

@@ -2,12 +2,12 @@
     if ($sup == "formok") {
 ?>
       <div class="alert alert-success text-center" role="alert">
-        Employes supprimé avec succés
+        Employé supprimé avec succés
       </div>
       <br>
       <br>
       <div class="text-center">
-        <button type="reset" class="btn btn-success"><a href="index.php?action=afficherUtilisateur" style="text-decoration:none;color: #FFFFFF">Retour a la liste</a></button>
+        <button type="reset" class="btn btn-success"><a href="index.php?action=afficherUtilisateur" style="text-decoration:none;color: #FFFFFF">Retour à la liste</a></button>
       </div>
 <?php
     }elseif($sup == "ticketenCours") {
@@ -19,7 +19,7 @@
       <br>
       <br>
       <div class="text-center">
-        <button type="reset" class="btn btn-danger"><a href="index.php?action=afficherUtilisateur" style="text-decoration:none;color: #FFFFFF">Retour a la liste</a></button>
+        <button type="reset" class="btn btn-danger"><a href="index.php?action=afficherUtilisateur" style="text-decoration:none;color: #FFFFFF">Retour à la liste</a></button>
       </div>
      
 <?php
@@ -32,7 +32,7 @@
       <br>
       <br>
       <div class="text-center">
-        <button type="reset" class="btn btn-danger"><a href="index.php?action=afficherUtilisateur" style="text-decoration:none;color: #FFFFFF">Retour a la liste</a></button>
+        <button type="reset" class="btn btn-danger"><a href="index.php?action=afficherUtilisateur" style="text-decoration:none;color: #FFFFFF">Retour à la liste</a></button>
       </div>
       
 <?php

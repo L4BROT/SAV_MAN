@@ -40,7 +40,7 @@
 
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <li><a class="dropdown-item" href="index.php?action=afficherUtilisateur">Afficher les utilisateurs</a></li>
-                        <li><a class="dropdown-item"  href="index.php?action=creerUtilisateur">Creer un utilisateur</a></li>
+                        <li><a class="dropdown-item"  href="index.php?action=creerUtilisateur">Créer un utilisateur</a></li>
                     </ul>
                 </div>
                 <a class="nav-link mx-2" style="color: red;" href="#" onclick="confirmLogout()">Déconnexion</a>

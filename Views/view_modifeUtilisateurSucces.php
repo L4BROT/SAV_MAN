@@ -2,7 +2,7 @@
     if ($liste == "formok") {
 ?>
       <div class="alert alert-success text-center" role="alert">
-        Employes modifié avec succés
+        Employé modifié avec succés
       </div>
       <br>
       <br>
@@ -15,7 +15,7 @@
 ?>
     <div class="alert alert-danger text-center" role="alert">
         Erreur lors de la modification<br>
-        Le mail existe deja<br>
+        Le mail existe déjà<br>
       </div>
       <br>
       <br>
@@ -54,7 +54,7 @@
     ?>
         <div class="alert alert-danger text-center" role="alert">
             Erreur lors de la modification<br>
-            Le format prenom est érroné<br>
+            Le format prénom est érroné<br>
           </div>
           <br>
           <br>

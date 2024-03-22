@@ -40,14 +40,14 @@ if(isset($liste_SAV)){
 
 if(isset($liste_rebus)){
     ?>
-    <h2 id="titre_art">Liste Rebus :</h2>
+    <h2 id="titre_art">Liste Rebut :</h2>
     <table id="myTable" class="table table-dark table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
                 <th>Article</th>
                 <th>Prix</th>
                 <th>Garantie</th>
-                <th>Qte Rebus</th>
+                <th>Qte Rebut</th>
             </tr>
         </thead>
         <tbody>

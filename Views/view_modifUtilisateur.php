@@ -9,7 +9,7 @@
         <input readonly type="text" class="form-control" id="id" name="id" aria-describedby="nomHelp" value="<?php echo $id ?>">
         <label for="idNom" class="form-label">Nom</label>
         <input type="text" class="form-control" id="idNom" name="Nom" aria-describedby="nomHelp" value="<?php echo $nom ?>">
-        <label for="idPrenom" class="form-label">Prenom</label>
+        <label for="idPrenom" class="form-label">Prénom</label>
         <input type="text" class="form-control" id="idPrenom" name="Prenom" aria-describedby="nomHelp" value="<?php echo $prenom ?>">
         <label for="idMail" class="form-label">Mail</label>
         <input type="email" class="form-control" id="idMail" name="Mail" aria-describedby="nomHelp" value="<?php echo $mail ?>">

@@ -5,13 +5,13 @@
 
 <form action="index.php" method="POST" id="formUtilisateur">
     <div class="alert alert-warning" role="alert">
-          Vous etes sur le point de creer un utilisateur
+          Vous êtes sur le point de créer un utilisateur
     </div>
     <br>
     <div class="mb-3">
         <label for="idNom" class="form-label">Nom</label>
         <input type="text" class="form-control" id="idNom" name="Nom" required>
-        <label for="idPrenom" class="form-label">Prenom</label>
+        <label for="idPrenom" class="form-label">Prénom</label>
         <input type="text" class="form-control" id="idPrenom" name="Prenom" required>
         <label for="idMail" class="form-label">Mail</label>
         <input type="email" class="form-control" id="idMail" pattern="[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+.[a-zA-Z.]{2,15}" name="Mail" required>
