@@ -302,31 +302,31 @@
     }
 
     // A voir si on garde #########################################################
-    function getListSAV(){
-        $connexion = getBdd();
+    // function getListSAV(){
+    //     $connexion = getBdd();
 
-        $requete = "select * from article where QTE_SAV > 0";
-        $reponse = $connexion->prepare($requete);
+    //     $requete = "select * from article where QTE_SAV > 0";
+    //     $reponse = $connexion->prepare($requete);
 
-        $reponse->execute();
+    //     $reponse->execute();
 
-        $resultats = $reponse->fetchAll(PDO::FETCH_ASSOC);
+    //     $resultats = $reponse->fetchAll(PDO::FETCH_ASSOC);
 
-        return $resultats;
-    }
+    //     return $resultats;
+    // }
 
-    function getListRebus(){
-        $connexion = getBdd();
+    // function getListRebus(){
+    //     $connexion = getBdd();
 
-        $requete = "select * from article where QTE_REBUS > 0";
-        $reponse = $connexion->prepare($requete);
+    //     $requete = "select * from article where QTE_REBUS > 0";
+    //     $reponse = $connexion->prepare($requete);
 
-        $reponse->execute();
+    //     $reponse->execute();
 
-        $resultats = $reponse->fetchAll(PDO::FETCH_ASSOC);
+    //     $resultats = $reponse->fetchAll(PDO::FETCH_ASSOC);
 
-        return $resultats;
-    }
+    //     return $resultats;
+    // }
 
     // A voir si on garde #########################################################
 
@@ -524,5 +524,65 @@
                 return $delet;
             }
         }
+    }
+
+    function getListSAV(){
+        if(file_exists("BDD/param.ini")){
+            $tParam = parse_ini_file("BDD/param.ini", true);
+            extract($tParam["BDD"]);
+        }
+
+        $options = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8");
+
+        $dsn = "mysql:host=$host;port=$port;dbname=$bdd";
+        $connexion = new PDO($dsn, $user, $password, $options);
+
+        $requete = "select ID_RETOUR as id, MOTIF_RETOUR as motif from retour_sav";
+        $reponse = $connexion->prepare($requete);
+
+        $reponse->execute();
+
+        $resultats = $reponse->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $resultats;
+    }
+
+    function getDetailSAV($id){
+        $connexion = getBdd();
+        $requete = "select * from retour_sav where ID_RETOUR = :id";
+        $reponse = $connexion->prepare($requete);
+
+        $reponse->bindValue(":id", htmlspecialchars($id), PDO::PARAM_STR);
+
+        $reponse->execute();
+
+        $resultat = $reponse->fetch(PDO::FETCH_ASSOC);
+        
+        $_SESSION["id_retour"] = $id;
+
+        return $resultat;
+    }
+
+    function getListRebus(){
+        if(file_exists("BDD/param.ini")){
+            $tParam = parse_ini_file("BDD/param.ini", true);
+            extract($tParam["BDD"]);
+        }
+
+        $options = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8");
+
+        $dsn = "mysql:host=$host;port=$port;dbname=$bdd";
+        $connexion = new PDO($dsn, $user, $password, $options);
+
+        $requete = "select ID_REBUS as id, MOTIF_REBUS as motif, QTE_ART as qte from stock_rebus";
+        $reponse = $connexion->prepare($requete);
+
+        $reponse->execute();
+
+        $resultats = $reponse->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $resultats;
     }
      

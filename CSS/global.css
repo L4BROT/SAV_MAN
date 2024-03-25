@@ -6,6 +6,10 @@ div.dataTables_wrapper div.dataTables_filter {
     margin: 10px 0;
 }
 
+img{
+    height: 40px;
+}
+
 div.dataTables_wrapper{
     margin: 10px 10%;
 }

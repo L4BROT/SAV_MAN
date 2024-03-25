@@ -20,7 +20,7 @@
 
 <nav class="navbar navbar-expand-lg" style="background-color: #3b4f9f;">
     <div class="container-fluid">
-        <a class="navbar-brand" href="index.php?action=accueil">LOGO</a>
+        <a class="navbar-brand" href="index.php?action=accueil"><img src="IMG/Menuiz Man.png" alt="logo entreprise"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
         </button>

@@ -67,11 +67,48 @@ if (isset($_GET["action"]) && $_GET["action"] == "accueil") {
     }
 }
 
-if (isset($_GET["action"]) && $_GET["action"] == "sav") {
-    $titre = "sav";
+// if (isset($_GET["action"]) && $_GET["action"] == "sav") {
+//     $titre = "sav";
 
-    // Affichage dynamique de la navbar suivant le niveau d'autorisation
-    if ($_SESSION['TYPE_UTILISATEUR'] == 'Admin'){
+//     // Affichage dynamique de la navbar suivant le niveau d'autorisation
+//     if ($_SESSION['TYPE_UTILISATEUR'] == 'Admin'){
+//         require_once("Views/view_header_admin.php");
+//     }
+//     else if($_SESSION['TYPE_UTILISATEUR'] == 'SAV'){
+//         require_once("Views/view_header.php");
+//     } 
+//     else {
+//         require_once("Views/view_header_hotline.php");
+//     }
+
+//     // Affichage sous-menu de la page sav
+//     require_once("Views/view_menu_sav.php");
+
+//     // Affichage des scénarios page sav
+//     if (isset($_POST["action"])) {
+//         switch ($_POST["action"]) {
+//             case "liste_SAV":
+//                 $liste_SAV = getListSAV();
+//                 require_once("Views/view_sav.php");
+//                 break;
+
+//             case "liste_rebus":
+//                 $liste_rebus = getListRebus();
+//                 require_once("Views/view_sav.php");
+//                 break;
+//         }
+//     }
+//     else{
+//         $liste_SAV = getListSAV();
+//         require_once("Views/view_sav.php");
+//     }
+// }
+
+
+if (isset($_GET["action"]) && $_GET["action"] == "sav") {
+    $titre = "SAV";
+
+    if ($_SESSION['TYPE_UTILISATEUR'] == 'Admin') {
         require_once("Views/view_header_admin.php");
     }
     else if($_SESSION['TYPE_UTILISATEUR'] == 'SAV'){
@@ -81,28 +118,36 @@ if (isset($_GET["action"]) && $_GET["action"] == "sav") {
         require_once("Views/view_header_hotline.php");
     }
 
-    // Affichage sous-menu de la page sav
-    require_once("Views/view_menu_sav.php");
-
-    // Affichage des scénarios page sav
+    require_once("Views/view_menu_SAV.php");
     if (isset($_POST["action"])) {
         switch ($_POST["action"]) {
             case "liste_SAV":
-                $liste_SAV = getListSAV();
-                require_once("Views/view_sav.php");
+                $titre = "Liste SAV";
+                $retour_sav = getListSAV();
+                require("Views/view_liste_SAV.php");
+                break;
+    
+            case "detail_SAV":
+                $titre = "Detail du retour";
+                $id = $_POST["id_retour"];
+                $detail_retour = getDetailSAV($id);
+                require("Views/view_liste_SAV.php");
                 break;
 
             case "liste_rebus":
-                $liste_rebus = getListRebus();
-                require_once("Views/view_sav.php");
+                $titre = "Liste rebus";
+                $stock_rebus = getListRebus();
+                require("Views/view_liste_SAV.php");
                 break;
         }
     }
     else{
-        $liste_SAV = getListSAV();
-        require_once("Views/view_sav.php");
+        $titre = "Liste SAV";
+        $retour_sav = getListSAV();
+        require("Views/view_liste_SAV.php");
     }
 }
+
 
 // Affichage onglet Expédition
 if (isset($_GET["action"]) && $_GET["action"] == "expedition") {
